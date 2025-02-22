@@ -189,7 +189,7 @@ const Marketplace = () => {
                 <h2 className="text-2xl font-semibold text-[#00ff41]">{category.name}</h2>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-3 gap-6">
                 {category.talents.map((talent, index) => (
                   <Card key={index} className="border-[#00ff41]/30 bg-black/50 backdrop-blur-sm hover:border-[#00ff41] transition-all duration-300">
                     <CardHeader>
