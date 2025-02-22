@@ -74,7 +74,7 @@ const Splash = () => {
 
       {/* Button with Matrix Style */}
       <Button
-        onClick={() => navigate('/main')}
+        onClick={() => navigate('/home')}
         className="mt-8 px-8 py-6 text-xl bg-transparent border-2 border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 transition-all duration-300 button-glow matrix-border"
       >
         Unlock Your Talent
