@@ -1,3 +1,4 @@
+
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Lightbulb, BarChart3, ShoppingBag } from "lucide-react";
@@ -80,13 +81,13 @@ const Index = () => {
       {/* How it Works Section */}
       <section id="how-it-works" className="py-20 bg-black/30">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-[#00ff41] text-glow">How It Works</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-[#00ff41] text-glow">How Coded Works</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
                 step: "01",
                 title: "Connect Wallet",
-                description: "Link your cryptocurrency wallet to get started",
+                description: "AI Agent Skills Analyst activated",
               },
               {
                 step: "02",
