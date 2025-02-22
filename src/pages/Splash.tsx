@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { MatrixBackground } from "@/components/MatrixBackground";
+import { BreakingChainAnimation } from "@/components/BreakingChainAnimation";
 
 const Splash = () => {
   const navigate = useNavigate();
@@ -10,14 +11,10 @@ const Splash = () => {
     <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
       <MatrixBackground />
       
-      {/* Logo/Title Section */}
+      {/* Breaking Chain Animation Section */}
       <div className="text-center mb-12 relative">
-        <h1 className="text-6xl font-bold tracking-wider text-[#00ff41] animate-pulse">
-          <span className="opacity-80">CHAIN</span>
-          <span className="mx-2 animate-ping">•</span>
-          <span className="opacity-80">BREAK</span>
-        </h1>
-        <div className="mt-4 text-[#00ff41]/60 text-xl tracking-widest animate-fade-in">
+        <BreakingChainAnimation />
+        <div className="mt-8 text-[#00ff41]/60 text-xl tracking-widest animate-fade-in">
           UNLOCK YOUR POTENTIAL
         </div>
       </div>
