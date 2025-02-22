@@ -1,4 +1,3 @@
-
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ShoppingBag } from "lucide-react";
@@ -52,9 +51,9 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-16 bg-black/50 backdrop-blur-sm">
+      <section id="features" className="py-20 bg-black/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-10 text-[#00ff41] text-glow">Why Coded?</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-[#00ff41] text-glow">Why Coded?</h2>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <p className="text-2xl text-[#00ff41]/90 leading-relaxed">
