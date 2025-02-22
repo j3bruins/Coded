@@ -19,71 +19,54 @@ export const MatrixBackground = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Chain link properties
-    const chains: Chain[] = [];
-    const numberOfChains = 15; // Reduced number for subtlety
+    // Matrix stream properties
+    const fontSize = 14;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops: number[] = new Array(columns).fill(1);
+    const characters = ['0', '1'];
 
-    interface Chain {
-      x: number;
-      y: number;
-      length: number;
-      speed: number;
-      opacity: number;
-    }
-
-    // Initialize chains
-    for (let i = 0; i < numberOfChains; i++) {
-      chains.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        length: 100 + Math.random() * 100,
-        speed: 1 + Math.random() * 2,
-        opacity: 0.1 + Math.random() * 0.2 // Keep opacity low for subtlety
-      });
-    }
-
-    // Draw a single chain link
-    const drawChainLink = (x: number, y: number, opacity: number) => {
-      if (!ctx) return;
-
-      ctx.strokeStyle = `rgba(0, 255, 65, ${opacity})`; // Matrix green with variable opacity
-      ctx.lineWidth = 2;
-      
-      // Draw oval shape for chain link
-      ctx.beginPath();
-      ctx.ellipse(x, y, 15, 8, 0, 0, Math.PI * 2);
-      ctx.stroke();
-    };
+    // Set up the font style
+    ctx.font = `${fontSize}px 'Share Tech Mono'`;
 
     // Animation loop
     const animate = () => {
-      if (!ctx || !canvas) return;
-      
-      // Create slight trail effect
+      // Create slight trail effect with semi-transparent black
       ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Update and draw chains
-      chains.forEach(chain => {
-        // Draw multiple links in a chain
-        for (let i = 0; i < chain.length; i += 30) {
-          drawChainLink(
-            chain.x,
-            chain.y - i,
-            chain.opacity * (1 - i / chain.length) // Fade out towards the top
-          );
+      // Set the text color with a slight glow effect
+      ctx.fillStyle = '#0f0';
+      ctx.shadowBlur = 2;
+      ctx.shadowColor = '#0f0';
+
+      // Draw the characters
+      for (let i = 0; i < drops.length; i++) {
+        // Generate a random character
+        const char = characters[Math.floor(Math.random() * characters.length)];
+        
+        // Calculate position
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+
+        // Draw the character with varying opacity based on position
+        const opacity = Math.random() * 0.5 + 0.5; // Random opacity between 0.5 and 1
+        ctx.fillStyle = `rgba(0, 255, 65, ${opacity})`;
+        ctx.fillText(char, x, y);
+
+        // Reset position if it reaches bottom or randomly
+        if (y > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
         }
 
-        // Move chain down
-        chain.y += chain.speed;
+        // Move drop down
+        drops[i]++;
+      }
 
-        // Reset chain position when it goes off screen
-        if (chain.y - chain.length > canvas.height) {
-          chain.y = -chain.length;
-          chain.x = Math.random() * canvas.width;
-          chain.opacity = 0.1 + Math.random() * 0.2;
-        }
-      });
+      // Create new streams randomly
+      if (Math.random() > 0.95) {
+        const randomColumn = Math.floor(Math.random() * drops.length);
+        drops[randomColumn] = 0;
+      }
 
       requestAnimationFrame(animate);
     };
