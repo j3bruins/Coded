@@ -2,7 +2,6 @@
 import { createRuntime, type Runtime } from "@maiar-ai/core";
 import { OpenAIProvider } from "@maiar-ai/model-openai";
 import { PluginTextGeneration } from "@maiar-ai/plugin-text";
-import { MemoryManager } from "@maiar-ai/memory";
 
 let runtime: Runtime | null = null;
 
@@ -14,11 +13,10 @@ export const initializeMaiarAI = async (openAIKey: string) => {
       apiKey: openAIKey,
       model: "gpt-4o-mini"
     }),
-    plugins: [new PluginTextGeneration()],
-    memory: new MemoryManager()
+    plugins: [new PluginTextGeneration()]
   });
 
-  await runtime.initialize();
+  await runtime.start();
   return runtime;
 };
 
@@ -45,8 +43,9 @@ export const generateSkillEvaluation = async (
   };
 
   try {
-    const response = await runtime.generate({
-      prompt: JSON.stringify(context),
+    const response = await runtime.process({
+      type: "text_generation",
+      input: JSON.stringify(context),
       parameters: {
         format: "json",
         style: "analytical",
@@ -55,8 +54,8 @@ export const generateSkillEvaluation = async (
     });
 
     return {
-      evaluation: response.text,
-      recommendedNFTs: response.data?.recommendedNFTs || []
+      evaluation: response.output,
+      recommendedNFTs: response.metadata?.recommendedNFTs || []
     };
   } catch (error) {
     console.error("Error in Maiar AI evaluation:", error);
@@ -66,7 +65,7 @@ export const generateSkillEvaluation = async (
 
 export const shutdownMaiarAI = async () => {
   if (runtime) {
-    await runtime.shutdown();
+    await runtime.stop();
     runtime = null;
   }
 };
