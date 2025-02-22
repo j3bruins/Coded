@@ -1,6 +1,6 @@
 
 import { Connection, PublicKey, Transaction, sendAndConfirmTransaction } from "@solana/web3.js";
-import { createValidationRequest, checkValidationStatus } from "./validationUtils";
+import { createValidationRequest, checkValidationStatus, createServiceDelivery, ServiceDelivery } from "./validationUtils";
 import { toast } from "sonner";
 
 export interface SkillNFT {
@@ -32,7 +32,7 @@ export const mintNFT = async (
     // Check validation status
     const validation = await checkValidationStatus(wallet.publicKey.toString(), skillNFT.name);
     
-    if (validation.status !== 'approved') {
+    if (validation?.status !== 'approved') {
       toast.error("NFT minting requires validation approval");
       return;
     }

@@ -1,6 +1,6 @@
 
 import { supabase } from "@/integrations/supabase/client";
-import { Connection, PublicKey, Transaction } from "@solana/web3.js";
+import { Connection, Transaction } from "@solana/web3.js";
 import { toast } from "sonner";
 
 export interface ValidationRequest {
@@ -8,14 +8,19 @@ export interface ValidationRequest {
   nft_name: string;
   category: string;
   proof_of_skill: string;
+  status?: 'pending' | 'approved' | 'rejected';
+  validator_notes?: string;
 }
 
 export interface ServiceDelivery {
+  id?: string;
   nft_mint_address: string;
   client_wallet: string;
   talent_wallet: string;
   amount_locked: number;
+  status?: 'pending' | 'approved' | 'rejected';
   delivery_proof?: string;
+  client_confirmation?: boolean;
 }
 
 export const createValidationRequest = async (request: ValidationRequest) => {
@@ -36,10 +41,10 @@ export const createValidationRequest = async (request: ValidationRequest) => {
 export const checkValidationStatus = async (wallet_address: string, nft_name: string) => {
   const { data, error } = await supabase
     .from('nft_validations')
-    .select('*')
+    .select()
     .eq('wallet_address', wallet_address)
     .eq('nft_name', nft_name)
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error('Error checking validation status:', error);
@@ -76,7 +81,7 @@ export const confirmServiceDelivery = async (
     .update({ 
       client_confirmation: true,
       status: 'approved'
-    })
+    } as ServiceDelivery)
     .eq('id', id)
     .eq('client_wallet', client_wallet);
 
@@ -86,7 +91,6 @@ export const confirmServiceDelivery = async (
   }
 
   // Here you would implement the actual fund release logic using Solana
-  // This is a placeholder for the actual implementation
   try {
     // Create a new transaction
     const transaction = new Transaction();

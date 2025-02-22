@@ -9,7 +9,81 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      nft_validations: {
+        Row: {
+          category: string
+          created_at: string | null
+          id: string
+          nft_name: string
+          proof_of_skill: string
+          status: Database["public"]["Enums"]["validation_status"] | null
+          updated_at: string | null
+          validator_notes: string | null
+          wallet_address: string
+        }
+        Insert: {
+          category: string
+          created_at?: string | null
+          id?: string
+          nft_name: string
+          proof_of_skill: string
+          status?: Database["public"]["Enums"]["validation_status"] | null
+          updated_at?: string | null
+          validator_notes?: string | null
+          wallet_address: string
+        }
+        Update: {
+          category?: string
+          created_at?: string | null
+          id?: string
+          nft_name?: string
+          proof_of_skill?: string
+          status?: Database["public"]["Enums"]["validation_status"] | null
+          updated_at?: string | null
+          validator_notes?: string | null
+          wallet_address?: string
+        }
+        Relationships: []
+      }
+      service_deliveries: {
+        Row: {
+          amount_locked: number
+          client_confirmation: boolean | null
+          client_wallet: string
+          created_at: string | null
+          delivery_proof: string | null
+          id: string
+          nft_mint_address: string
+          status: Database["public"]["Enums"]["validation_status"] | null
+          talent_wallet: string
+          updated_at: string | null
+        }
+        Insert: {
+          amount_locked: number
+          client_confirmation?: boolean | null
+          client_wallet: string
+          created_at?: string | null
+          delivery_proof?: string | null
+          id?: string
+          nft_mint_address: string
+          status?: Database["public"]["Enums"]["validation_status"] | null
+          talent_wallet: string
+          updated_at?: string | null
+        }
+        Update: {
+          amount_locked?: number
+          client_confirmation?: boolean | null
+          client_wallet?: string
+          created_at?: string | null
+          delivery_proof?: string | null
+          id?: string
+          nft_mint_address?: string
+          status?: Database["public"]["Enums"]["validation_status"] | null
+          talent_wallet?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -18,7 +92,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      validation_status: "pending" | "approved" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
