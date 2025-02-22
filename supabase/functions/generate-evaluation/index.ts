@@ -40,16 +40,16 @@ For each NFT recommendation, include:
 - Name: The specific skill or competency
 - Category: Technical, Management, or Industry Expertise
 - Description: 1-2 sentences explaining the skill
-- Suggested Price: Estimated market value in ETH
+- Suggested Price: Estimated market value in SOL (Solana)
 
-Focus on concrete, marketable skills rather than general qualities. Be specific and realistic in your valuations.
+Focus on concrete, marketable skills rather than general qualities. Be specific and realistic in your valuations. Price the NFTs in SOL (Solana) with values typically ranging from 0.1 to 10 SOL based on skill rarity and demand.
 
 Format the NFT recommendations to be easily parsed, following this exact structure for each:
 ---NFT START---
 Name: [Skill Name]
 Category: [Category]
 Description: [Description]
-Price: [X.XX ETH]
+Price: [X.XX SOL]
 ---NFT END---`;
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -63,7 +63,7 @@ Price: [X.XX ETH]
         messages: [
           {
             role: 'system',
-            content: 'You are an expert AI evaluator specializing in skill tokenization and professional assessment.'
+            content: 'You are an expert AI evaluator specializing in skill tokenization and professional assessment on the Solana blockchain.'
           },
           { role: 'user', content: prompt }
         ],
@@ -127,3 +127,4 @@ Price: [X.XX ETH]
     });
   }
 });
+
