@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -321,25 +322,43 @@ const categories: Category[] = [
 
 const Marketplace = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-matrix relative overflow-hidden transform-gpu perspective-1000">
       <MatrixBackground />
+      
+      {/* 3D Floating Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#00ff41]/5 rounded-full filter blur-3xl animate-float" 
+             style={{ animationDelay: '0s', transform: 'translateZ(-100px)' }} />
+        <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-[#00ff41]/5 rounded-full filter blur-3xl animate-float" 
+             style={{ animationDelay: '2s', transform: 'translateZ(-150px)' }} />
+        <div className="absolute top-1/2 left-2/3 w-72 h-72 bg-[#00ff41]/5 rounded-full filter blur-3xl animate-float" 
+             style={{ animationDelay: '4s', transform: 'translateZ(-200px)' }} />
+      </div>
+
       <Navigation />
+      
       <div className="container mx-auto px-4 py-24 relative z-10">
-        <h1 className="text-4xl font-bold mb-12 text-center text-[#00ff41] matrix-border p-4 inline-block">
+        <h1 className="text-4xl font-bold mb-12 text-center text-[#00ff41] matrix-border p-4 inline-block 
+                     transform hover:scale-105 transition-transform duration-300 backdrop-blur-sm">
           Talent Marketplace
         </h1>
         
         <div className="space-y-12">
           {categories.map((category) => (
-            <div key={category.name} className="space-y-4">
-              <div className="flex items-center gap-2 matrix-border p-4">
+            <div key={category.name} className="space-y-4 transform-gpu hover:translate-z-10">
+              <div className="flex items-center gap-2 matrix-border p-4 backdrop-blur-sm 
+                           transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_0_15px_rgba(0,255,65,0.2)]">
                 {category.icon}
                 <h2 className="text-2xl font-semibold text-[#00ff41]">{category.name}</h2>
               </div>
               
-              <div className="grid grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {category.talents.map((talent, index) => (
-                  <Card key={index} className="border-[#00ff41]/30 bg-black/50 backdrop-blur-sm hover:border-[#00ff41] transition-all duration-300">
+                  <Card key={index} 
+                        className="border-[#00ff41]/30 bg-black/50 backdrop-blur-sm 
+                                 hover:border-[#00ff41] transition-all duration-300
+                                 transform hover:translate-y-[-5px] hover:translate-z-10
+                                 hover:shadow-[0_0_20px_rgba(0,255,65,0.15)]">
                     <CardHeader>
                       <CardTitle className="text-[#00ff41]">{talent.name}</CardTitle>
                       <CardDescription className="text-[#00ff41]/70">{talent.title}</CardDescription>
@@ -347,10 +366,12 @@ const Marketplace = () => {
                     <CardContent className="space-y-4">
                       <p className="text-[#00ff41]/90">{talent.description}</p>
                       <div className="flex justify-between items-center">
-                        <Badge variant="outline" className="border-[#00ff41] text-[#00ff41]">
+                        <Badge variant="outline" 
+                               className="border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10">
                           {talent.rate}
                         </Badge>
-                        <Badge variant="outline" className="border-[#00ff41] text-[#00ff41]">
+                        <Badge variant="outline" 
+                               className="border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10">
                           {talent.availability}
                         </Badge>
                       </div>
