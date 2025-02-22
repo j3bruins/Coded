@@ -1,3 +1,4 @@
+
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ShoppingBag } from "lucide-react";
@@ -13,19 +14,19 @@ const Index = () => {
       <MatrixBackground />
       
       {/* Hero Section */}
-      <section className="pt-16 pb-12 px-4">
+      <section className="pt-8 pb-6 px-4">
         <div className="max-w-7xl mx-auto text-center">
-          <div className="inline-block mb-6 matrix-fade-in" style={{ animationDelay: "0.2s" }}>
+          <div className="inline-block mb-3 matrix-fade-in" style={{ animationDelay: "0.2s" }}>
             <img
               src="/lovable-uploads/88eb9bb7-e7e1-4590-8962-dad42cb603c0.png"
               alt="Coded Waveform Logo"
-              className="h-56 w-auto mx-auto"
+              className="h-28 w-auto mx-auto"
             />
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-[#00ff41] text-glow matrix-fade-in" style={{ animationDelay: "0.4s" }}>
+          <h1 className="text-4xl md:text-5xl font-bold mb-2 text-[#00ff41] text-glow matrix-fade-in" style={{ animationDelay: "0.4s" }}>
             Tokenize Your Talents
           </h1>
-          <p className="text-xl text-[#00ff41]/80 mb-6 max-w-2xl mx-auto matrix-fade-in" style={{ animationDelay: "0.6s" }}>
+          <p className="text-lg text-[#00ff41]/80 mb-4 max-w-2xl mx-auto matrix-fade-in" style={{ animationDelay: "0.6s" }}>
             Transform your skills into digital assets. Connect, trade, and grow in the new talent economy.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center matrix-fade-in" style={{ animationDelay: "0.8s" }}>
