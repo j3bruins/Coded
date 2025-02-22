@@ -10,22 +10,45 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
+  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
     const { linkedinProfile, additionalInfo } = await req.json();
+    console.log('Received request for evaluation:', { linkedinProfile, additionalInfo });
+
+    if (!openAIApiKey) {
+      throw new Error('OpenAI API key is not configured');
+    }
 
     const prompt = `As an AI talent evaluator, analyze the following professional information:
 
-LinkedIn Profile: ${linkedinProfile}
-Additional Information: ${additionalInfo}
+LinkedIn Profile: ${linkedinProfile || 'Not provided'}
+Additional Information: ${additionalInfo || 'Not provided'}
 
-Provide a detailed evaluation of their skills and recommend how to tokenize them. Focus on:
-1. Technical Skills Token (TST) opportunities
-2. Project Management Token (PMT) potential
-3. Industry Expertise Token (IET) valuation
+Please provide a detailed evaluation of the professional profile focusing on the following areas:
+
+1. Technical Skills Assessment:
+   - Primary technical competencies
+   - Skill level indicators
+   - Areas for potential skill tokenization
+
+2. Professional Experience Analysis:
+   - Key achievements and their market value
+   - Project management capabilities
+   - Leadership and collaboration indicators
+
+3. Industry Expertise:
+   - Domain knowledge areas
+   - Industry-specific certifications or qualifications
+   - Market positioning recommendations
+
+4. Tokenization Strategy:
+   - Recommended token categories (Technical, Management, Industry Expertise)
+   - Token value proposition
+   - Marketplace positioning recommendations
 
 Format the response with clear sections and actionable recommendations.`;
 
@@ -38,23 +61,38 @@ Format the response with clear sections and actionable recommendations.`;
       body: JSON.stringify({
         model: 'gpt-4o-mini',
         messages: [
-          { role: 'system', content: 'You are an expert AI evaluator specializing in skill tokenization and professional assessment.' },
+          {
+            role: 'system',
+            content: 'You are an expert AI evaluator specializing in skill tokenization and professional assessment. Provide detailed, structured analysis with clear recommendations.'
+          },
           { role: 'user', content: prompt }
         ],
       }),
     });
 
-    const data = await response.json();
-    const evaluation = data.choices[0].message.content;
+    if (!response.ok) {
+      const error = await response.text();
+      console.error('OpenAI API error:', error);
+      throw new Error('Failed to generate evaluation');
+    }
 
-    return new Response(JSON.stringify({ evaluation }), {
+    const data = await response.json();
+    console.log('Generated evaluation successfully');
+
+    return new Response(JSON.stringify({ 
+      evaluation: data.choices[0].message.content 
+    }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
+
   } catch (error) {
     console.error('Error in generate-evaluation function:', error);
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ 
+      error: error.message || 'Failed to generate evaluation' 
+    }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }
 });
+

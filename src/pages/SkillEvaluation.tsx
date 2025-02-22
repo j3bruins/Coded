@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Upload, FileText, Linkedin, Loader2, AlertCircle } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const SkillEvaluation = () => {
   const [linkedinProfile, setLinkedinProfile] = useState("");
@@ -49,22 +50,21 @@ const SkillEvaluation = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/generate-evaluation', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      const { data, error } = await supabase.functions.invoke('generate-evaluation', {
+        body: {
           linkedinProfile,
           additionalInfo,
-        }),
+        },
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to generate evaluation');
+      if (error) {
+        throw error;
       }
 
-      const data = await response.json();
+      if (!data?.evaluation) {
+        throw new Error('No evaluation data received');
+      }
+
       setEvaluation(data.evaluation);
       toast({
         title: "Evaluation Complete",
@@ -186,3 +186,4 @@ const SkillEvaluation = () => {
 };
 
 export default SkillEvaluation;
+
