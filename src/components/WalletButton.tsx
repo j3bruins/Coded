@@ -4,8 +4,7 @@ import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { Button } from "./ui/button";
 import { Loader2, Wallet } from "lucide-react";
 import { toast } from "sonner";
-
-require("@solana/wallet-adapter-react-ui/styles.css");
+import "@solana/wallet-adapter-react-ui/styles.css";
 
 export const WalletButton = () => {
   const { wallet, disconnect, connecting, connected, publicKey } = useWallet();
