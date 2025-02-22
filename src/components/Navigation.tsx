@@ -1,17 +1,19 @@
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingBag } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="fixed w-full bg-black/80 backdrop-blur-md z-50 border-b border-[#00ff41]/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <span className="text-2xl font-bold text-[#00ff41] text-glow">
+            <span className="text-2xl font-bold text-[#00ff41] text-glow cursor-pointer" onClick={() => navigate('/main')}>
               TokenifyTalents
             </span>
           </div>
@@ -29,6 +31,14 @@ export const Navigation = () => {
               className="border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 matrix-border"
             >
               Connect Wallet
+            </Button>
+            <Button
+              variant="outline"
+              className="border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 matrix-border flex items-center gap-2"
+              onClick={() => navigate('/marketplace')}
+            >
+              <ShoppingBag className="w-4 h-4" />
+              Marketplace
             </Button>
           </div>
 
@@ -72,10 +82,20 @@ export const Navigation = () => {
             >
               Connect Wallet
             </Button>
+            <Button
+              variant="outline"
+              className="w-full mt-2 border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 matrix-border flex items-center justify-center gap-2"
+              onClick={() => {
+                navigate('/marketplace');
+                setIsOpen(false);
+              }}
+            >
+              <ShoppingBag className="w-4 h-4" />
+              Marketplace
+            </Button>
           </div>
         </div>
       )}
     </nav>
   );
 };
-
