@@ -10,46 +10,100 @@ const Splash = () => {
     <div className="min-h-screen bg-matrix flex flex-col items-center justify-center relative overflow-hidden">
       <MatrixBackground />
       
-      {/* Matrix Chain Link Icon with Animation */}
+      {/* 3D Locks with Breaking Animation */}
       <div className="relative mb-8 animate-float w-48 h-48">
         <div className="absolute inset-0 blur-lg bg-[#00ff41]/20"></div>
         <svg
           viewBox="0 0 100 100"
           className="w-full h-full filter drop-shadow-[0_0_15px_rgba(0,255,65,0.8)]"
         >
-          {/* First Chain Link */}
+          {/* First Lock - Breaking Apart */}
           <g className="animate-pulse" style={{ animationDelay: '0.5s' }}>
+            {/* Lock Body */}
             <path
-              d="M35,30 L50,30 C60,30 70,40 70,50 C70,60 60,70 50,70 L35,70 C25,70 15,60 15,50 C15,40 25,30 35,30"
+              d="M25,45 L45,45 L45,65 L25,65 L25,45"
               fill="none"
               stroke="#00ff41"
-              strokeWidth="4"
-              className="opacity-70"
+              strokeWidth="3"
+              className="opacity-80"
             />
+            {/* Lock Shackle - Breaking */}
             <path
-              d="M33,35 L50,35 C57,35 65,42 65,50 C65,58 57,65 50,65 L33,65 C26,65 18,58 18,50 C18,42 26,35 33,35"
+              d="M30,45 C30,35 40,35 40,45"
+              fill="none"
+              stroke="#00ff41"
+              strokeWidth="3"
+              className="opacity-90 animate-[float_2s_ease-in-out_infinite]"
+            />
+            {/* Breaking Pieces */}
+            <path
+              d="M35,38 L37,36"
               fill="none"
               stroke="#00ff41"
               strokeWidth="2"
-              className="opacity-90"
+              className="animate-[float_1.5s_ease-in-out_infinite]"
+            />
+            <path
+              d="M33,40 L35,38"
+              fill="none"
+              stroke="#00ff41"
+              strokeWidth="2"
+              className="animate-[float_2s_ease-in-out_infinite]"
+              style={{ animationDelay: '0.2s' }}
             />
           </g>
-          
-          {/* Second Chain Link */}
-          <g className="animate-pulse">
+
+          {/* Second Lock - Breaking Apart */}
+          <g className="animate-pulse" transform="translate(30,0)">
+            {/* Lock Body */}
             <path
-              d="M50,30 L65,30 C75,30 85,40 85,50 C85,60 75,70 65,70 L50,70 C40,70 30,60 30,50 C30,40 40,30 50,30"
+              d="M25,45 L45,45 L45,65 L25,65 L25,45"
               fill="none"
               stroke="#00ff41"
-              strokeWidth="4"
-              className="opacity-70"
+              strokeWidth="3"
+              className="opacity-80"
             />
+            {/* Lock Shackle - Breaking */}
             <path
-              d="M48,35 L65,35 C72,35 80,42 80,50 C80,58 72,65 65,65 L48,65 C41,65 33,58 33,50 C33,42 41,35 48,35"
+              d="M40,45 C40,35 30,35 30,45"
+              fill="none"
+              stroke="#00ff41"
+              strokeWidth="3"
+              className="opacity-90 animate-[float_2s_ease-in-out_infinite]"
+            />
+            {/* Breaking Pieces */}
+            <path
+              d="M35,38 L33,36"
               fill="none"
               stroke="#00ff41"
               strokeWidth="2"
-              className="opacity-90"
+              className="animate-[float_1.5s_ease-in-out_infinite]"
+            />
+            <path
+              d="M37,40 L35,38"
+              fill="none"
+              stroke="#00ff41"
+              strokeWidth="2"
+              className="animate-[float_2s_ease-in-out_infinite]"
+              style={{ animationDelay: '0.3s' }}
+            />
+          </g>
+
+          {/* 3D Effect Highlights */}
+          <g className="opacity-40">
+            {/* Lock 1 Highlight */}
+            <path
+              d="M27,47 L43,47"
+              stroke="#00ff41"
+              strokeWidth="1"
+              className="animate-pulse"
+            />
+            {/* Lock 2 Highlight */}
+            <path
+              d="M57,47 L73,47"
+              stroke="#00ff41"
+              strokeWidth="1"
+              className="animate-pulse"
             />
           </g>
 
