@@ -87,17 +87,14 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-12">
             {[
               {
-                step: "01",
                 title: "Create Profile",
                 description: "Start by creating your professional profile. AI Agent Skills Analyst activated",
               },
               {
-                step: "02",
                 title: "Skills Based NFTs",
                 description: "Your skills are evaluated and minted as unique NFTs",
               },
               {
-                step: "03",
                 title: "Market & Shop",
                 description: "Market your talent & shop around in the marketplace",
               },
@@ -107,9 +104,6 @@ const Index = () => {
                 className="relative bg-black/40 p-8 rounded-lg border border-[#00ff41]/30 hover:border-[#00ff41] transition-all duration-300 matrix-border matrix-fade-in group hover:transform hover:scale-105"
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
-                <div className="text-8xl font-bold text-[#00ff41]/10 absolute -top-10 -left-6 transition-all duration-300 group-hover:text-[#00ff41]/20">
-                  {item.step}
-                </div>
                 <div className="relative">
                   <h3 className="text-2xl font-bold mb-4 text-[#00ff41] tracking-wider">
                     {item.title}
