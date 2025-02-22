@@ -2,12 +2,12 @@
 import { useState } from "react";
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Upload, FileText, Linkedin, Loader2 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useToast } from "@/components/ui/use-toast";
 
 const SkillEvaluation = () => {
   const [linkedinProfile, setLinkedinProfile] = useState("");
@@ -15,7 +15,7 @@ const SkillEvaluation = () => {
   const [additionalInfo, setAdditionalInfo] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [evaluation, setEvaluation] = useState("");
-  const navigate = useNavigate();
+  const { toast } = useToast();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -28,29 +28,34 @@ const SkillEvaluation = () => {
     setIsLoading(true);
 
     try {
-      // Here we would integrate with OpenAI API to analyze the resume and LinkedIn profile
-      // For now, we'll simulate a response
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setEvaluation(`Based on your profile analysis:
-      
-1. Technical Skills Token (TST)
-- Value: High demand for your programming skills
-- Recommended tokenization: Create separate tokens for each major tech stack
+      const response = await fetch('/api/generate-evaluation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          linkedinProfile,
+          additionalInfo,
+        }),
+      });
 
-2. Project Management Token (PMT)
-- Value: Growing market for agile management expertise
-- Recommended: Bundle with leadership skills
+      if (!response.ok) {
+        throw new Error('Failed to generate evaluation');
+      }
 
-3. Industry Expertise Token (IET)
-- Value: Specialized knowledge in your sector
-- Potential: Create themed token collections
-
-Next steps:
-1. Mint your Technical Skills Token first
-2. Build a portfolio of project deliverables
-3. Network with potential token investors`);
+      const data = await response.json();
+      setEvaluation(data.evaluation);
+      toast({
+        title: "Evaluation Complete",
+        description: "Your skill evaluation has been generated successfully.",
+      });
     } catch (error) {
       console.error("Error evaluating skills:", error);
+      toast({
+        title: "Error",
+        description: "Failed to generate evaluation. Please try again.",
+        variant: "destructive",
+      });
     } finally {
       setIsLoading(false);
     }
