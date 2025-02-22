@@ -11,8 +11,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/splash" element={<Splash />} />
+        <Route path="/" element={<Splash />} />
+        <Route path="/main" element={<Index />} />
         <Route path="/skill-evaluation" element={<SkillEvaluation />} />
         <Route path="/marketplace" element={<Marketplace />} />
         <Route path="/developer-profile" element={<DeveloperProfile />} />
