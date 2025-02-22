@@ -6,8 +6,8 @@ import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { clusterApiUrl } from "@solana/web3.js";
 import { useMemo } from "react";
 
-// Import styles
-require("@solana/wallet-adapter-react-ui/styles.css");
+// Import styles using ES modules syntax
+import "@solana/wallet-adapter-react-ui/styles.css";
 
 export function SolanaProvider({ children }: { children: React.ReactNode }) {
   // Set to 'devnet' for development
@@ -24,3 +24,4 @@ export function SolanaProvider({ children }: { children: React.ReactNode }) {
     </ConnectionProvider>
   );
 }
+

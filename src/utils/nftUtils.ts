@@ -1,6 +1,12 @@
 
 import { Connection, PublicKey, Transaction, sendAndConfirmTransaction } from "@solana/web3.js";
-import { SkillNFT } from "@/pages/SkillEvaluation";
+
+export interface SkillNFT {
+  name: string;
+  category: string;
+  description: string;
+  suggestedPrice: string;
+}
 
 export const mintNFT = async (
   connection: Connection,
