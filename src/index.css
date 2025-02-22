@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
 
 @tailwind base;
@@ -56,13 +55,27 @@
   position: relative;
 }
 
-/* Enhanced text glow for better visibility */
+/* Improved text glow for better visibility */
 .text-glow {
-  text-shadow: 0 0 10px var(--matrix-green),
-               0 0 20px var(--matrix-green),
-               0 0 30px var(--matrix-green),
-               0 0 40px var(--matrix-green);
-  letter-spacing: 0.5px;
+  text-shadow: 
+    0 0 2px var(--matrix-green),
+    0 0 4px var(--matrix-green),
+    0 0 8px var(--matrix-green);
+  letter-spacing: 1px;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Enhanced text styles for headers */
+h1.text-glow {
+  -webkit-text-stroke: 1px var(--matrix-green);
+  filter: brightness(1.2) contrast(1.1);
+}
+
+h2.text-glow, h3.text-glow {
+  -webkit-text-stroke: 0.5px var(--matrix-green);
+  filter: brightness(1.1) contrast(1.05);
 }
 
 /* Enhanced 3D button effect */
@@ -160,8 +173,13 @@
   animation: matrix-fade 0.5s ease-out forwards;
 }
 
-/* Text outline for better visibility */
-h1, h2, h3, p {
-  -webkit-text-stroke: 0.5px rgba(0, 255, 65, 0.3);
+/* Improved text contrast and readability */
+h1, h2, h3 {
+  -webkit-text-stroke: 1px rgba(0, 255, 65, 0.4);
+  text-rendering: optimizeLegibility;
 }
 
+p {
+  -webkit-text-stroke: 0.5px rgba(0, 255, 65, 0.2);
+  text-rendering: optimizeLegibility;
+}
