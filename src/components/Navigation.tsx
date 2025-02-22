@@ -26,6 +26,9 @@ export const Navigation = () => {
             <a href="#how-it-works" className="text-[#00ff41]/80 hover:text-[#00ff41] transition-colors">
               How it Works
             </a>
+            <a href="#validator" className="text-[#00ff41]/80 hover:text-[#00ff41] transition-colors">
+              Validator
+            </a>
             <Button
               variant="outline"
               className="border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 matrix-border"
@@ -67,6 +70,13 @@ export const Navigation = () => {
               onClick={() => setIsOpen(false)}
             >
               How it Works
+            </a>
+            <a
+              href="#validator"
+              className="block px-3 py-2 text-[#00ff41]/80 hover:text-[#00ff41] transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              Validator
             </a>
             <Button
               variant="outline"

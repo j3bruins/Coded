@@ -86,7 +86,12 @@ const SkillEvaluation = () => {
 
     setIsLoading(true);
     try {
-      await mintNFT(connection, wallet, nft);
+      await mintNFT(
+        connection,
+        wallet,
+        nft,
+        "Proof of skill placeholder" // Adding the missing proofOfSkill parameter
+      );
       
       toast({
         title: "NFT Minted Successfully!",
