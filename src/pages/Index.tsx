@@ -1,3 +1,4 @@
+
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Lightbulb, BarChart3, ShoppingBag } from "lucide-react";
@@ -12,7 +13,7 @@ const Index = () => {
       <MatrixBackground />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4">
+      <section className="pt-24 pb-16 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <div className="inline-block mb-8 matrix-fade-in" style={{ animationDelay: "0.2s" }}>
             <img
