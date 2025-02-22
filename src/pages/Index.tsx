@@ -1,6 +1,7 @@
+
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Shield, Lightbulb, BarChart3 } from "lucide-react";
+import { ArrowRight, Shield, Lightbulb, BarChart3, ShoppingBag } from "lucide-react";
 import { MatrixBackground } from "@/components/MatrixBackground";
 import { useNavigate } from "react-router-dom";
 
@@ -37,10 +38,11 @@ const Index = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
-              className="border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 matrix-border"
+              onClick={() => navigate('/marketplace')}
+              className="border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 matrix-border flex items-center gap-2"
             >
-              Learn More
+              <ShoppingBag className="w-5 h-5" />
+              Visit Marketplace
             </Button>
           </div>
         </div>
