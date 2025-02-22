@@ -8,6 +8,7 @@ import Splash from "./pages/Splash";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Marketplace from "./pages/Marketplace";
+import SkillEvaluation from "./pages/SkillEvaluation";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
           <Route path="/" element={<Splash />} />
           <Route path="/main" element={<Index />} />
           <Route path="/marketplace" element={<Marketplace />} />
+          <Route path="/skill-evaluation" element={<SkillEvaluation />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

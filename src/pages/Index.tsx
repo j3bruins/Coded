@@ -120,7 +120,11 @@ const Index = () => {
             Join the future of the talent economy today.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" className="bg-[#00ff41] text-black hover:bg-[#00ff41]/90 button-glow">
+            <Button 
+              size="lg" 
+              onClick={() => navigate('/skill-evaluation')}
+              className="bg-[#00ff41] text-black hover:bg-[#00ff41]/90 button-glow"
+            >
               Get Started Now
             </Button>
             <Button 
