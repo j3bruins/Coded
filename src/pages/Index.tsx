@@ -87,7 +87,7 @@ const Index = () => {
               {
                 step: "01",
                 title: "Create Profile",
-                description: "Start by creating your professional profile",
+                description: "Start by creating your professional profile. AI Agent Skills Analyst activated",
               },
               {
                 step: "02",
