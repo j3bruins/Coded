@@ -53,6 +53,7 @@
     rgba(0, 0, 0, 0.95) 100%
   );
   position: relative;
+  transform-style: preserve-3d;
 }
 
 .text-glow {
@@ -87,6 +88,7 @@
   border: 1px solid var(--matrix-green);
   transform-style: preserve-3d;
   transition: all 0.3s ease;
+  perspective: 1000px;
 }
 
 .matrix-border::before {
