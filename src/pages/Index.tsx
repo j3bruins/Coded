@@ -1,4 +1,3 @@
-
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ShoppingBag } from "lucide-react";
@@ -20,7 +19,7 @@ const Index = () => {
             <img
               src="/lovable-uploads/88eb9bb7-e7e1-4590-8962-dad42cb603c0.png"
               alt="Coded Waveform Logo"
-              className="h-28 w-auto mx-auto"
+              className="h-32 w-auto mx-auto"
             />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[#00ff41] text-glow matrix-fade-in" style={{ animationDelay: "0.4s" }}>
