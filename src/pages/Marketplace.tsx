@@ -1,10 +1,10 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Brain, Code, Megaphone, Briefcase, Headphones, Coins, Heart, Home, Cog, Globe } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
 import { MatrixBackground } from "@/components/MatrixBackground";
+import { useNavigate } from "react-router-dom";
 
 interface TalentCard {
   name: string;
@@ -321,6 +321,14 @@ const categories: Category[] = [
 ];
 
 const Marketplace = () => {
+  const navigate = useNavigate();
+
+  const handleProfileClick = (name: string) => {
+    if (name === "Alex Smith") {
+      navigate("/developer-profile");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-matrix relative overflow-hidden transform-gpu perspective-1000">
       <MatrixBackground />
@@ -355,10 +363,12 @@ const Marketplace = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {category.talents.map((talent, index) => (
                   <Card key={index} 
-                        className="border-[#00ff41]/30 bg-black/50 backdrop-blur-sm 
+                        onClick={() => handleProfileClick(talent.name)}
+                        className={`border-[#00ff41]/30 bg-black/50 backdrop-blur-sm 
                                  hover:border-[#00ff41] transition-all duration-300
                                  transform hover:translate-y-[-5px] hover:translate-z-10
-                                 hover:shadow-[0_0_20px_rgba(0,255,65,0.15)]">
+                                 hover:shadow-[0_0_20px_rgba(0,255,65,0.15)]
+                                 ${talent.name === "Alex Smith" ? "cursor-pointer" : ""}`}>
                     <CardHeader>
                       <CardTitle className="text-[#00ff41]">{talent.name}</CardTitle>
                       <CardDescription className="text-[#00ff41]/70">{talent.title}</CardDescription>
