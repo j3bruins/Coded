@@ -38,11 +38,12 @@ export const BreakingChainAnimation = () => {
 
   return (
     <div className="relative w-[300px] h-[200px] mx-auto">
-      <div className="absolute inset-0 animate-pulse">
+      <div className="absolute inset-0">
         <img 
           src={processedImageUrl || '/lovable-uploads/8f40772d-736b-4ab1-b43c-0ea103a55cf6.png'}
           alt="Interconnected rings"
-          className="w-full h-full object-contain mix-blend-screen filter brightness-125"
+          className="w-full h-full object-contain"
+          style={{ filter: 'brightness(1.25) saturate(1.2)' }}
         />
       </div>
     </div>
