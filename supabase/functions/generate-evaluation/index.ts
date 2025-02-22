@@ -10,7 +10,6 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
-  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
@@ -28,29 +27,24 @@ serve(async (req) => {
 LinkedIn Profile: ${linkedinProfile || 'Not provided'}
 Additional Information: ${additionalInfo || 'Not provided'}
 
-Please provide a detailed evaluation of the professional profile focusing on the following areas:
+Please provide a detailed evaluation of the professional profile and recommend specific skills that could be tokenized as NFTs. Structure your response in the following format:
 
-1. Technical Skills Assessment:
-   - Primary technical competencies
-   - Skill level indicators
-   - Areas for potential skill tokenization
+1. Overall Assessment:
+   - Evaluate key skills and experiences
+   - Identify core competencies
+   - Highlight unique selling points
 
-2. Professional Experience Analysis:
-   - Key achievements and their market value
-   - Project management capabilities
-   - Leadership and collaboration indicators
+2. NFT Token Recommendations:
+   For each recommended skill token, provide:
+   - Token Name
+   - Category (Technical, Management, Industry Expertise)
+   - Description
+   - Suggested Market Value
 
-3. Industry Expertise:
-   - Domain knowledge areas
-   - Industry-specific certifications or qualifications
-   - Market positioning recommendations
+Focus on high-value skills that would be attractive in a marketplace setting.
+Provide specific, actionable recommendations for tokenization.
 
-4. Tokenization Strategy:
-   - Recommended token categories (Technical, Management, Industry Expertise)
-   - Token value proposition
-   - Marketplace positioning recommendations
-
-Format the response with clear sections and actionable recommendations.`;
+Format the response to be easily parsed, with clear sections for the assessment and NFT recommendations.`;
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -63,7 +57,7 @@ Format the response with clear sections and actionable recommendations.`;
         messages: [
           {
             role: 'system',
-            content: 'You are an expert AI evaluator specializing in skill tokenization and professional assessment. Provide detailed, structured analysis with clear recommendations.'
+            content: 'You are an expert AI evaluator specializing in skill tokenization and professional assessment. Provide detailed analysis and specific NFT token recommendations.'
           },
           { role: 'user', content: prompt }
         ],
@@ -79,8 +73,34 @@ Format the response with clear sections and actionable recommendations.`;
     const data = await response.json();
     console.log('Generated evaluation successfully');
 
+    // Parse the AI response to extract NFT recommendations
+    const content = data.choices[0].message.content;
+    
+    // Mock NFT recommendations (in production, you would parse these from the AI response)
+    const recommendedNFTs = [
+      {
+        name: "Full Stack Development",
+        category: "Technical",
+        description: "Comprehensive web development expertise across frontend and backend technologies",
+        suggestedPrice: "0.5 ETH"
+      },
+      {
+        name: "Project Management",
+        category: "Management",
+        description: "Experience in leading complex technical projects and teams",
+        suggestedPrice: "0.3 ETH"
+      },
+      {
+        name: "Blockchain Architecture",
+        category: "Technical",
+        description: "Expertise in designing and implementing blockchain solutions",
+        suggestedPrice: "0.8 ETH"
+      }
+    ];
+
     return new Response(JSON.stringify({ 
-      evaluation: data.choices[0].message.content 
+      evaluation: content,
+      recommendedNFTs
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
@@ -95,4 +115,3 @@ Format the response with clear sections and actionable recommendations.`;
     });
   }
 });
-

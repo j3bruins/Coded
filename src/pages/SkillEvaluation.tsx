@@ -6,9 +6,17 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Upload, FileText, Linkedin, Loader2, AlertCircle } from "lucide-react";
+import { Upload, FileText, Linkedin, Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { Badge } from "@/components/ui/badge";
+
+interface SkillNFT {
+  name: string;
+  category: string;
+  description: string;
+  suggestedPrice: string;
+}
 
 const SkillEvaluation = () => {
   const [linkedinProfile, setLinkedinProfile] = useState("");
@@ -17,6 +25,8 @@ const SkillEvaluation = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [evaluation, setEvaluation] = useState("");
   const [formError, setFormError] = useState("");
+  const [recommendedNFTs, setRecommendedNFTs] = useState<SkillNFT[]>([]);
+  const [selectedNFTs, setSelectedNFTs] = useState<SkillNFT[]>([]);
   const { toast } = useToast();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +43,33 @@ const SkillEvaluation = () => {
     }
     setFormError("");
     return true;
+  };
+
+  const handleNFTSelection = (nft: SkillNFT) => {
+    setSelectedNFTs(prev => {
+      const isSelected = prev.some(item => item.name === nft.name);
+      if (isSelected) {
+        return prev.filter(item => item.name !== nft.name);
+      }
+      return [...prev, nft];
+    });
+  };
+
+  const loadToMarketplace = async () => {
+    if (selectedNFTs.length === 0) {
+      toast({
+        title: "Selection Required",
+        description: "Please select at least one skill to tokenize",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Here you would integrate with your marketplace
+    toast({
+      title: "Skills Added to Marketplace",
+      description: `${selectedNFTs.length} skills have been prepared for tokenization`,
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -66,6 +103,12 @@ const SkillEvaluation = () => {
       }
 
       setEvaluation(data.evaluation);
+      
+      // Parse recommended NFTs from the evaluation
+      if (data.recommendedNFTs) {
+        setRecommendedNFTs(data.recommendedNFTs);
+      }
+
       toast({
         title: "Evaluation Complete",
         description: "Your skill evaluation has been generated successfully.",
@@ -171,11 +214,59 @@ const SkillEvaluation = () => {
             </form>
 
             {evaluation && (
-              <div className="mt-8 p-6 border border-[#00ff41]/30 rounded-lg bg-black/50">
-                <h3 className="text-xl font-semibold mb-4 text-[#00ff41]">AI Evaluation Results</h3>
-                <pre className="whitespace-pre-wrap text-[#00ff41]/90 font-mono text-sm">
-                  {evaluation}
-                </pre>
+              <div className="mt-8 space-y-6">
+                <div className="p-6 border border-[#00ff41]/30 rounded-lg bg-black/50">
+                  <h3 className="text-xl font-semibold mb-4 text-[#00ff41]">AI Evaluation Results</h3>
+                  <pre className="whitespace-pre-wrap text-[#00ff41]/90 font-mono text-sm">
+                    {evaluation}
+                  </pre>
+                </div>
+
+                {recommendedNFTs.length > 0 && (
+                  <div className="p-6 border border-[#00ff41]/30 rounded-lg bg-black/50">
+                    <h3 className="text-xl font-semibold mb-4 text-[#00ff41]">Recommended Skill NFTs</h3>
+                    <div className="space-y-4">
+                      {recommendedNFTs.map((nft, index) => (
+                        <div
+                          key={index}
+                          onClick={() => handleNFTSelection(nft)}
+                          className={`p-4 border rounded-lg cursor-pointer transition-all duration-200 ${
+                            selectedNFTs.some(item => item.name === nft.name)
+                              ? 'border-[#00ff41] bg-[#00ff41]/10'
+                              : 'border-[#00ff41]/30 hover:border-[#00ff41]/60'
+                          }`}
+                        >
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <h4 className="font-semibold text-[#00ff41]">{nft.name}</h4>
+                              <p className="text-sm text-[#00ff41]/70">{nft.description}</p>
+                              <div className="mt-2 flex gap-2">
+                                <Badge variant="outline" className="border-[#00ff41]/50 text-[#00ff41]">
+                                  {nft.category}
+                                </Badge>
+                                <Badge variant="outline" className="border-[#00ff41]/50 text-[#00ff41]">
+                                  {nft.suggestedPrice}
+                                </Badge>
+                              </div>
+                            </div>
+                            {selectedNFTs.some(item => item.name === nft.name) && (
+                              <CheckCircle2 className="w-6 h-6 text-[#00ff41]" />
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {selectedNFTs.length > 0 && (
+                      <Button
+                        onClick={loadToMarketplace}
+                        className="w-full mt-4 bg-[#00ff41] text-black hover:bg-[#00ff41]/90 button-glow"
+                      >
+                        Load Selected Skills to Marketplace
+                      </Button>
+                    )}
+                  </div>
+                )}
               </div>
             )}
           </CardContent>
@@ -186,4 +277,3 @@ const SkillEvaluation = () => {
 };
 
 export default SkillEvaluation;
-
