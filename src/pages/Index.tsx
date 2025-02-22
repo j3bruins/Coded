@@ -86,18 +86,18 @@ const Index = () => {
             {[
               {
                 step: "01",
-                title: "Connect Wallet",
-                description: "AI Agent Skills Analyst activated",
+                title: "Create Profile",
+                description: "Start by creating your professional profile",
               },
               {
                 step: "02",
-                title: "Create Profile",
-                description: "Add your skills and experience to your portfolio",
+                title: "Skills Based NFTs",
+                description: "Your skills are evaluated and minted as unique NFTs",
               },
               {
                 step: "03",
-                title: "Mint Talent NFTs",
-                description: "Transform your skills into tradeable digital assets",
+                title: "Market & Shop",
+                description: "Market your talent & shop around in the marketplace",
               },
             ].map((item, index) => (
               <div key={index} className="relative matrix-fade-in" style={{ animationDelay: `${index * 0.2}s` }}>
