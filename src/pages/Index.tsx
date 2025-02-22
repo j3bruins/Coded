@@ -20,7 +20,7 @@ const Index = () => {
             <img
               src="/lovable-uploads/88eb9bb7-e7e1-4590-8962-dad42cb603c0.png"
               alt="Coded Waveform Logo"
-              className="h-32 w-auto mx-auto"
+              className="h-40 w-auto mx-auto" // Increased from h-32 to h-40 (25% increase)
             />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[#00ff41] text-glow matrix-fade-in" style={{ animationDelay: "0.4s" }}>
@@ -52,11 +52,11 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-16 bg-black/50 backdrop-blur-sm">
+      <section id="features" className="py-12 bg-black/50 backdrop-blur-sm"> // Reduced from py-16 to py-12 (25% reduction)
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-10 text-[#00ff41] text-glow">Why Coded?</h2>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
+          <h2 className="text-3xl font-bold text-center mb-8 text-[#00ff41] text-glow">Why Coded?</h2> // Reduced mb-10 to mb-8
+          <div className="grid md:grid-cols-2 gap-8 items-center"> // Reduced gap-12 to gap-8
+            <div className="space-y-4"> // Reduced space-y-6 to space-y-4
               <p className="text-2xl text-[#00ff41]/90 leading-relaxed">
                 Take your talents beyond the trenches. Tokenize them and sell them via NFTs.
                 <span className="block mt-4 text-3xl font-bold">The world is yours.</span>
