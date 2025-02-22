@@ -10,121 +10,116 @@ const Splash = () => {
     <div className="min-h-screen bg-matrix flex flex-col items-center justify-center relative overflow-hidden">
       <MatrixBackground />
       
-      {/* Enhanced 3D Chain Links Animation */}
-      <div className="relative mb-8 animate-float w-64 h-64">
+      {/* Matrix-style Chain Links */}
+      <div className="relative mb-8 animate-float w-96 h-48">
         <div className="absolute inset-0 blur-lg bg-[#00ff41]/20"></div>
         <svg
-          viewBox="0 0 100 100"
+          viewBox="0 0 240 120"
           className="w-full h-full filter drop-shadow-[0_0_15px_rgba(0,255,65,0.8)]"
         >
-          {/* First Chain Link */}
-          <g className="animate-pulse" style={{ transform: 'translate(-10px, 0) rotate(-5deg)' }}>
-            <path
-              d="M20,35 C20,25 35,25 35,35 L35,65 C35,75 20,75 20,65 L20,35"
-              fill="none"
-              stroke="#00ff41"
-              strokeWidth="3"
-              className="opacity-80"
-            />
-            {/* 3D effect for first link */}
-            <path
-              d="M20,35 C20,45 35,45 35,35"
-              fill="none"
-              stroke="#00ff41"
-              strokeWidth="3"
-              className="opacity-60"
-            />
-            <path
-              d="M20,65 C20,55 35,55 35,65"
-              fill="none"
-              stroke="#00ff41"
-              strokeWidth="3"
-              className="opacity-60"
-            />
-          </g>
-
-          {/* Middle Chain Link */}
+          {/* Left Chain Link */}
           <g className="animate-pulse" style={{ animationDelay: '0.2s' }}>
             <path
-              d="M35,50 C35,40 65,40 65,50 L65,80 C65,90 35,90 35,80 L35,50"
+              d="M40,45 L60,45 C75,45 75,75 60,75 L40,75 C25,75 25,45 40,45 Z"
               fill="none"
               stroke="#00ff41"
-              strokeWidth="3"
-              className="opacity-80"
+              strokeWidth="4"
+              className="opacity-90"
             />
-            {/* 3D effect for middle link */}
+            {/* Inner details for depth */}
             <path
-              d="M35,50 C35,60 65,60 65,50"
+              d="M40,50 L60,50 C70,50 70,70 60,70 L40,70 C30,70 30,50 40,50"
               fill="none"
               stroke="#00ff41"
-              strokeWidth="3"
-              className="opacity-60"
+              strokeWidth="2"
+              className="opacity-40"
             />
-            <path
-              d="M35,80 C35,70 65,70 65,80"
-              fill="none"
-              stroke="#00ff41"
-              strokeWidth="3"
-              className="opacity-60"
-            />
+            {/* Matrix-style texture */}
+            <g className="opacity-30">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <line
+                  key={`left-texture-${i}`}
+                  x1={35 + i * 8}
+                  y1="50"
+                  x2={35 + i * 8}
+                  y2="70"
+                  stroke="#00ff41"
+                  strokeWidth="0.5"
+                  className="animate-pulse"
+                  style={{ animationDelay: `${i * 0.1}s` }}
+                />
+              ))}
+            </g>
           </g>
 
-          {/* Last Chain Link */}
-          <g className="animate-pulse" style={{ transform: 'translate(10px, 0) rotate(5deg)', animationDelay: '0.4s' }}>
-            <path
-              d="M65,20 C65,10 95,10 95,20 L95,50 C95,60 65,60 65,50 L65,20"
-              fill="none"
-              stroke="#00ff41"
-              strokeWidth="3"
-              className="opacity-80"
-            />
-            {/* 3D effect for last link */}
-            <path
-              d="M65,20 C65,30 95,30 95,20"
-              fill="none"
-              stroke="#00ff41"
-              strokeWidth="3"
-              className="opacity-60"
-            />
-            <path
-              d="M65,50 C65,40 95,40 95,50"
-              fill="none"
-              stroke="#00ff41"
-              strokeWidth="3"
-              className="opacity-60"
-            />
-          </g>
-
-          {/* Highlight effects */}
-          <g className="opacity-30">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <ellipse
-                key={i}
-                cx={30 + i * 30}
-                cy={40 + i * 15}
-                rx="4"
-                ry="2"
-                fill="#00ff41"
-                className="animate-pulse"
-                style={{ animationDelay: `${i * 0.2}s` }}
-              />
+          {/* Breaking Effect */}
+          <g className="animate-pulse" style={{ animationDelay: '0.3s' }}>
+            {Array.from({ length: 8 }).map((_, i) => (
+              <g key={`break-${i}`} className="animate-float" style={{ animationDelay: `${i * 0.1}s` }}>
+                <path
+                  d={`M${110 + Math.random() * 20},${55 + Math.random() * 10} l${Math.random() * 6 - 3},${Math.random() * 6 - 3}`}
+                  stroke="#00ff41"
+                  strokeWidth="2"
+                  className="opacity-60"
+                />
+                <circle
+                  cx={110 + Math.random() * 20}
+                  cy={55 + Math.random() * 10}
+                  r="1"
+                  fill="#00ff41"
+                  className="opacity-80"
+                />
+              </g>
             ))}
           </g>
 
-          {/* Breaking effect particles */}
-          <g className="opacity-50">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <circle
-                key={i}
-                cx={45 + Math.sin(i) * 10}
-                cy={55 + Math.cos(i) * 10}
-                r="1"
-                fill="#00ff41"
-                className="animate-float"
-                style={{ animationDelay: `${i * 0.1}s` }}
-              />
-            ))}
+          {/* Right Chain Link */}
+          <g className="animate-pulse" style={{ animationDelay: '0.4s' }}>
+            <path
+              d="M140,45 L160,45 C175,45 175,75 160,75 L140,75 C125,75 125,45 140,45 Z"
+              fill="none"
+              stroke="#00ff41"
+              strokeWidth="4"
+              className="opacity-90"
+            />
+            {/* Inner details for depth */}
+            <path
+              d="M140,50 L160,50 C170,50 170,70 160,70 L140,70 C130,70 130,50 140,50"
+              fill="none"
+              stroke="#00ff41"
+              strokeWidth="2"
+              className="opacity-40"
+            />
+            {/* Matrix-style texture */}
+            <g className="opacity-30">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <line
+                  key={`right-texture-${i}`}
+                  x1={135 + i * 8}
+                  y1="50"
+                  x2={135 + i * 8}
+                  y2="70"
+                  stroke="#00ff41"
+                  strokeWidth="0.5"
+                  className="animate-pulse"
+                  style={{ animationDelay: `${i * 0.1}s` }}
+                />
+              ))}
+            </g>
           </g>
+
+          {/* Digital particles effect */}
+          {Array.from({ length: 12 }).map((_, i) => (
+            <circle
+              key={`particle-${i}`}
+              cx={70 + Math.random() * 100}
+              cy={40 + Math.random() * 40}
+              r="0.5"
+              fill="#00ff41"
+              className="animate-float"
+              style={{ animationDelay: `${i * 0.2}s` }}
+            />
+          ))}
         </svg>
       </div>
 
@@ -139,4 +134,3 @@ const Splash = () => {
 };
 
 export default Splash;
-
