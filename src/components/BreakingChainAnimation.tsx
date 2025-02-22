@@ -1,12 +1,10 @@
 
 import { useEffect, useState } from 'react';
-import { Unlink } from 'lucide-react';
 
 export const BreakingChainAnimation = () => {
   const [broken, setBroken] = useState(false);
 
   useEffect(() => {
-    // Start the break animation after a short delay
     const timer = setTimeout(() => {
       setBroken(true);
     }, 1000);
@@ -15,28 +13,22 @@ export const BreakingChainAnimation = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center space-x-4">
-      <div className={`transition-transform duration-700 ${broken ? '-translate-x-6' : ''}`}>
-        <Unlink
-          className="w-16 h-16 text-[#00ff41] animate-pulse"
-          strokeWidth={1.5}
-        />
-      </div>
-      <div 
-        className={`transition-all duration-700 transform ${
-          broken 
-            ? 'scale-150 opacity-0 translate-y-2' 
-            : 'scale-100 opacity-100'
-        }`}
-      >
-        <div className="w-3 h-3 bg-[#00ff41] rounded-full animate-ping" />
-      </div>
-      <div className={`transition-transform duration-700 ${broken ? 'translate-x-6' : ''}`}>
-        <Unlink
-          className="w-16 h-16 text-[#00ff41] animate-pulse"
-          strokeWidth={1.5}
-        />
-      </div>
+    <div className="flex items-center justify-center space-x-3">
+      {[1, 2, 3, 4, 5].map((index) => (
+        <div
+          key={index}
+          className={`
+            w-12 h-12 rounded-lg border-2 border-[#00ff41] 
+            flex items-center justify-center
+            transition-all duration-700
+            ${broken && index === 2 ? 'opacity-0 scale-150' : 'opacity-100 scale-100'}
+            ${broken && index < 3 ? '-translate-x-6' : ''}
+            ${broken && index > 3 ? 'translate-x-6' : ''}
+          `}
+        >
+          <div className="w-6 h-6 rounded-sm bg-[#00ff41]/20 animate-pulse" />
+        </div>
+      ))}
     </div>
   );
 };
