@@ -81,7 +81,7 @@ const Index = () => {
       {/* How it Works Section */}
       <section id="how-it-works" className="py-20 bg-black/30">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-[#00ff41] text-glow">How It Works</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-black">How It Works</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -101,12 +101,12 @@ const Index = () => {
               },
             ].map((item, index) => (
               <div key={index} className="relative matrix-fade-in" style={{ animationDelay: `${index * 0.2}s` }}>
-                <div className="text-6xl font-bold text-[#00ff41]/10 absolute -top-8 -left-4">
+                <div className="text-6xl font-bold text-black/10 absolute -top-8 -left-4">
                   {item.step}
                 </div>
                 <div className="relative">
-                  <h3 className="text-xl font-semibold mb-2 text-[#00ff41]">{item.title}</h3>
-                  <p className="text-[#00ff41]/70">{item.description}</p>
+                  <h3 className="text-xl font-semibold mb-2 text-black">{item.title}</h3>
+                  <p className="text-black/70">{item.description}</p>
                 </div>
               </div>
             ))}
