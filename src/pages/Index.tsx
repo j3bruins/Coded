@@ -1,6 +1,6 @@
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Shield, Lightbulb, BarChart3, ShoppingBag } from "lucide-react";
+import { ArrowRight, Shield, Lightbulb, BarChart3 } from "lucide-react";
 import { MatrixBackground } from "@/components/MatrixBackground";
 import { useNavigate } from "react-router-dom";
 
@@ -34,7 +34,12 @@ const Index = () => {
               Get Started
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button size="lg" variant="outline" className="border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 matrix-border">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
+              className="border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 matrix-border"
+            >
               Learn More
             </Button>
           </div>
@@ -127,24 +132,13 @@ const Index = () => {
           <p className="text-[#00ff41]/90 mb-8">
             Join the future of the talent economy today.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button 
-              size="lg" 
-              onClick={() => navigate('/skill-evaluation')}
-              className="bg-[#00ff41] text-black hover:bg-[#00ff41]/90 button-glow"
-            >
-              Get Started Now
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              onClick={() => navigate('/marketplace')}
-              className="border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 matrix-border flex items-center gap-2 animate-pulse"
-            >
-              <ShoppingBag className="w-5 h-5" />
-              Visit Marketplace
-            </Button>
-          </div>
+          <Button 
+            size="lg" 
+            onClick={() => navigate('/skill-evaluation')}
+            className="bg-[#00ff41] text-black hover:bg-[#00ff41]/90 button-glow"
+          >
+            Get Started Now
+          </Button>
         </div>
       </section>
     </div>
