@@ -2,6 +2,7 @@
 import { createRuntime, type Runtime } from "@maiar-ai/core";
 import { OpenAIProvider } from "@maiar-ai/model-openai";
 import { PluginTextGeneration } from "@maiar-ai/plugin-text";
+import { MemoryManager } from "@maiar-ai/memory";
 
 let runtime: Runtime | null = null;
 
@@ -13,7 +14,10 @@ export const initializeMaiarAI = async (openAIKey: string) => {
       apiKey: openAIKey,
       model: "gpt-4o-mini"
     }),
-    plugins: [new PluginTextGeneration()]
+    plugins: [new PluginTextGeneration()],
+    memory: new MemoryManager({
+      type: 'memory'
+    })
   });
 
   await runtime.start();
@@ -43,9 +47,11 @@ export const generateSkillEvaluation = async (
   };
 
   try {
-    const response = await runtime.process({
-      type: "text_generation",
-      input: JSON.stringify(context),
+    const response = await runtime.generate({
+      input: {
+        type: "text",
+        content: JSON.stringify(context)
+      },
       parameters: {
         format: "json",
         style: "analytical",
