@@ -37,7 +37,6 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Share Tech Mono', monospace;
-    background: radial-gradient(circle at center, #001a00 0%, #000000 100%);
     position: relative;
     overflow-x: hidden;
   }
