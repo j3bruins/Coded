@@ -11,7 +11,6 @@ export const MatrixBackground = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Set canvas size to match window size
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -28,42 +27,34 @@ export const MatrixBackground = () => {
     // Set up the font style
     ctx.font = `${fontSize}px 'Share Tech Mono'`;
 
-    // Animation loop
     const animate = () => {
-      // Create slight trail effect with semi-transparent black
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      // Create more pronounced trail effect with darker background
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Set the text color with a slight glow effect
-      ctx.fillStyle = '#0f0';
-      ctx.shadowBlur = 2;
-      ctx.shadowColor = '#0f0';
+      // Reduce the glow effect
+      ctx.shadowBlur = 1;
+      ctx.shadowColor = 'rgba(0, 255, 65, 0.3)';
 
-      // Draw the characters
       for (let i = 0; i < drops.length; i++) {
-        // Generate a random character
         const char = characters[Math.floor(Math.random() * characters.length)];
-        
-        // Calculate position
         const x = i * fontSize;
         const y = drops[i] * fontSize;
 
-        // Draw the character with varying opacity based on position
-        const opacity = Math.random() * 0.5 + 0.5; // Random opacity between 0.5 and 1
+        // Reduce the opacity of characters
+        const opacity = Math.random() * 0.3 + 0.2; // Random opacity between 0.2 and 0.5
         ctx.fillStyle = `rgba(0, 255, 65, ${opacity})`;
         ctx.fillText(char, x, y);
 
-        // Reset position if it reaches bottom or randomly
-        if (y > canvas.height && Math.random() > 0.975) {
+        // Adjust stream behavior
+        if (y > canvas.height && Math.random() > 0.985) {
           drops[i] = 0;
         }
-
-        // Move drop down
         drops[i]++;
       }
 
-      // Create new streams randomly
-      if (Math.random() > 0.95) {
+      // Reduce frequency of new streams
+      if (Math.random() > 0.97) {
         const randomColumn = Math.floor(Math.random() * drops.length);
         drops[randomColumn] = 0;
       }
@@ -82,7 +73,7 @@ export const MatrixBackground = () => {
     <canvas
       ref={canvasRef}
       className="fixed top-0 left-0 w-full h-full pointer-events-none z-[-1]"
-      style={{ background: 'radial-gradient(circle at center, #001a00 0%, #000000 100%)' }}
+      style={{ background: 'radial-gradient(circle at center, #000000 0%, #000000 100%)' }}
     />
   );
 };

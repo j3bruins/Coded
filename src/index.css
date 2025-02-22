@@ -6,27 +6,27 @@
 
 @layer base {
   :root {
-    --matrix-green: #00ff41;
+    --matrix-green: rgba(0, 255, 65, 0.8);
     --matrix-dark: #000000;
     --background: 0 0% 0%;
-    --foreground: 150 100% 50%;
+    --foreground: 150 100% 40%;
     --card: 0 0% 3%;
-    --card-foreground: 150 100% 50%;
+    --card-foreground: 150 100% 40%;
     --popover: 0 0% 3%;
-    --popover-foreground: 150 100% 50%;
-    --primary: 150 100% 50%;
+    --popover-foreground: 150 100% 40%;
+    --primary: 150 100% 40%;
     --primary-foreground: 0 0% 0%;
-    --secondary: 150 80% 30%;
-    --secondary-foreground: 150 100% 50%;
+    --secondary: 150 80% 20%;
+    --secondary-foreground: 150 100% 40%;
     --muted: 0 0% 10%;
-    --muted-foreground: 150 70% 40%;
-    --accent: 150 100% 50%;
+    --muted-foreground: 150 70% 30%;
+    --accent: 150 100% 40%;
     --accent-foreground: 0 0% 0%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 0%;
-    --border: 150 80% 30%;
-    --input: 150 80% 30%;
-    --ring: 150 100% 50%;
+    --border: 150 80% 20%;
+    --input: 150 80% 20%;
+    --ring: 150 100% 40%;
     --radius: 0.5rem;
   }
 
@@ -48,23 +48,23 @@
 
 .bg-matrix {
   background: linear-gradient(180deg, 
-    rgba(0, 255, 65, 0.15) 0%,
-    rgba(0, 0, 0, 0.95) 100%
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 0, 0, 0.98) 100%
   );
   position: relative;
   transform-style: preserve-3d;
 }
 
 .text-glow {
-  color: var(--matrix-green);
-  -webkit-text-stroke: 1px var(--matrix-green);
+  color: rgba(0, 255, 65, 0.8);
+  -webkit-text-stroke: 0.5px rgba(0, 255, 65, 0.4);
   letter-spacing: 1px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .button-glow {
-  box-shadow: 0 0 10px var(--matrix-green),
-              0 0 20px var(--matrix-green);
+  box-shadow: 0 0 5px rgba(0, 255, 65, 0.4),
+              0 0 10px rgba(0, 255, 65, 0.2);
   transition: all 0.3s ease;
   transform-style: preserve-3d;
   perspective: 1000px;
@@ -72,9 +72,9 @@
 }
 
 .button-glow:hover {
-  box-shadow: 0 0 15px var(--matrix-green),
-              0 0 30px var(--matrix-green),
-              0 0 45px var(--matrix-green);
+  box-shadow: 0 0 8px rgba(0, 255, 65, 0.5),
+              0 0 15px rgba(0, 255, 65, 0.3),
+              0 0 20px rgba(0, 255, 65, 0.2);
   transform: translateY(-3px) translateZ(10px) scale(1.02);
 }
 
@@ -84,7 +84,7 @@
 
 .matrix-border {
   position: relative;
-  border: 1px solid var(--matrix-green);
+  border: 1px solid rgba(0, 255, 65, 0.3);
   transform-style: preserve-3d;
   transition: all 0.3s ease;
   perspective: 1000px;
@@ -97,7 +97,7 @@
   left: -2px;
   right: -2px;
   bottom: -2px;
-  border: 1px solid var(--matrix-green);
+  border: 1px solid rgba(0, 255, 65, 0.2);
   animation: border-pulse 2s infinite;
   transform-style: preserve-3d;
   transition: all 0.3s ease;
@@ -106,15 +106,15 @@
 .matrix-border:hover {
   transform: translateZ(20px) scale(1.02);
   box-shadow: 
-    0 0 20px rgba(0, 255, 65, 0.2),
-    0 0 40px rgba(0, 255, 65, 0.1);
+    0 0 10px rgba(0, 255, 65, 0.1),
+    0 0 20px rgba(0, 255, 65, 0.05);
 }
 
 .matrix-border:hover::before {
   transform: translateZ(10px);
   box-shadow: 
-    0 0 30px rgba(0, 255, 65, 0.3),
-    0 0 60px rgba(0, 255, 65, 0.1);
+    0 0 15px rgba(0, 255, 65, 0.15),
+    0 0 30px rgba(0, 255, 65, 0.05);
 }
 
 .matrix-background {
