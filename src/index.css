@@ -55,30 +55,13 @@
   position: relative;
 }
 
-/* Improved text glow for better visibility */
 .text-glow {
-  text-shadow: 
-    0 0 2px var(--matrix-green),
-    0 0 4px var(--matrix-green),
-    0 0 8px var(--matrix-green);
+  color: var(--matrix-green);
+  -webkit-text-stroke: 1px var(--matrix-green);
   letter-spacing: 1px;
   font-weight: 700;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Enhanced text styles for headers */
-h1.text-glow {
-  -webkit-text-stroke: 1px var(--matrix-green);
-  filter: brightness(1.2) contrast(1.1);
-}
-
-h2.text-glow, h3.text-glow {
-  -webkit-text-stroke: 0.5px var(--matrix-green);
-  filter: brightness(1.1) contrast(1.05);
-}
-
-/* Enhanced 3D button effect */
 .button-glow {
   box-shadow: 0 0 10px var(--matrix-green),
               0 0 20px var(--matrix-green);
@@ -115,7 +98,6 @@ h2.text-glow, h3.text-glow {
   animation: border-pulse 2s infinite;
 }
 
-/* Matrix rain animation */
 .matrix-background {
   position: fixed;
   top: 0;
@@ -131,7 +113,6 @@ h2.text-glow, h3.text-glow {
   color: var(--matrix-green);
   font-size: 20px;
   animation: matrix-fall 10s linear infinite;
-  text-shadow: 0 0 5px var(--matrix-green);
   opacity: 0;
   transform-style: preserve-3d;
   perspective: 1000px;
@@ -173,13 +154,12 @@ h2.text-glow, h3.text-glow {
   animation: matrix-fade 0.5s ease-out forwards;
 }
 
-/* Improved text contrast and readability */
 h1, h2, h3 {
-  -webkit-text-stroke: 1px rgba(0, 255, 65, 0.4);
-  text-rendering: optimizeLegibility;
+  color: var(--matrix-green);
+  -webkit-text-stroke: 1px var(--matrix-green);
 }
 
 p {
-  -webkit-text-stroke: 0.5px rgba(0, 255, 65, 0.2);
-  text-rendering: optimizeLegibility;
+  color: var(--matrix-green);
+  -webkit-text-stroke: 0.25px var(--matrix-green);
 }
