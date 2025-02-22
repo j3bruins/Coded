@@ -11,7 +11,7 @@ const Splash = () => {
     <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
       <MatrixBackground />
       
-      {/* Breaking Chain Animation Section */}
+      {/* Chain Link Animation Section */}
       <div className="text-center mb-12 relative">
         <BreakingChainAnimation />
         <div className="mt-8 text-[#00ff41]/60 text-xl tracking-widest animate-fade-in">
