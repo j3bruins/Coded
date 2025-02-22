@@ -6,7 +6,7 @@ import { MatrixBackground } from "@/components/MatrixBackground";
 import { useNavigate } from "react-router-dom";
 import Globe from "@/components/Globe";
 
-const Index = () => {
+const MainContent = () => {
   const navigate = useNavigate();
 
   return (
@@ -133,4 +133,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default MainContent;
