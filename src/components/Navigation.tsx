@@ -34,7 +34,7 @@ export const Navigation = () => {
             </Button>
             <Button
               variant="outline"
-              className="border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 matrix-border flex items-center gap-2"
+              className="border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 matrix-border flex items-center gap-2 animate-pulse"
               onClick={() => navigate('/marketplace')}
             >
               <ShoppingBag className="w-4 h-4" />
