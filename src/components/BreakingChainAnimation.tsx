@@ -2,33 +2,41 @@
 import { useEffect, useState } from 'react';
 
 export const BreakingChainAnimation = () => {
-  const [broken, setBroken] = useState(false);
+  const [connected, setConnected] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setBroken(true);
-    }, 1000);
+      setConnected(true);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className="flex items-center justify-center space-x-3">
-      {[1, 2, 3, 4, 5].map((index) => (
-        <div
-          key={index}
-          className={`
-            w-12 h-12 rounded-lg border-2 border-[#00ff41] 
-            flex items-center justify-center
-            transition-all duration-700
-            ${broken && index === 2 ? 'opacity-0 scale-150' : 'opacity-100 scale-100'}
-            ${broken && index < 3 ? '-translate-x-6' : ''}
-            ${broken && index > 3 ? 'translate-x-6' : ''}
-          `}
-        >
-          <div className="w-6 h-6 rounded-sm bg-[#00ff41]/20 animate-pulse" />
-        </div>
-      ))}
+    <div className="flex items-center justify-center space-x-6">
+      {/* Left Chain Link */}
+      <div 
+        className={`
+          w-16 h-24 border-4 border-[#00ff41] rounded-full
+          flex items-center justify-center relative
+          transition-all duration-1000 ease-in-out
+          ${connected ? 'translate-x-4' : '-translate-x-4'}
+        `}
+      >
+        <div className="absolute inset-0 bg-[#00ff41]/10 rounded-full animate-pulse" />
+      </div>
+
+      {/* Right Chain Link */}
+      <div 
+        className={`
+          w-16 h-24 border-4 border-[#00ff41] rounded-full
+          flex items-center justify-center relative
+          transition-all duration-1000 ease-in-out
+          ${connected ? '-translate-x-4' : 'translate-x-4'}
+        `}
+      >
+        <div className="absolute inset-0 bg-[#00ff41]/10 rounded-full animate-pulse" />
+      </div>
     </div>
   );
 };
