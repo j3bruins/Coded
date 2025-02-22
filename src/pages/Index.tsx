@@ -27,7 +27,11 @@ const Index = () => {
             Transform your skills into digital assets. Connect, trade, and grow in the new talent economy.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center matrix-fade-in" style={{ animationDelay: "0.8s" }}>
-            <Button size="lg" className="bg-[#00ff41] text-black hover:bg-[#00ff41]/90 button-glow">
+            <Button 
+              size="lg" 
+              onClick={() => navigate('/skill-evaluation')}
+              className="bg-[#00ff41] text-black hover:bg-[#00ff41]/90 button-glow"
+            >
               Get Started
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
