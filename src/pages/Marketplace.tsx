@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -37,6 +36,13 @@ const categories: Category[] = [
         description: "Expert in React, Node.js, and blockchain integration",
         rate: "12 SOL/hr",
         availability: "Immediately Available"
+      },
+      {
+        name: "John Doe",
+        title: "Smart Contract Developer",
+        description: "Focused on secure smart contract development and auditing",
+        rate: "14 SOL/hr",
+        availability: "Available Now"
       }
     ]
   },
@@ -50,6 +56,20 @@ const categories: Category[] = [
         description: "Specializing in crypto and NFT marketing campaigns",
         rate: "10 SOL/hr",
         availability: "Available Now"
+      },
+      {
+        name: "Laura Martinez",
+        title: "Social Media Manager",
+        description: "Expert in crypto community growth and engagement",
+        rate: "8 SOL/hr",
+        availability: "Available in 1 week"
+      },
+      {
+        name: "Chris Wilson",
+        title: "Content Strategist",
+        description: "Specialized in Web3 content and thought leadership",
+        rate: "9 SOL/hr",
+        availability: "Immediately Available"
       }
     ]
   },
@@ -63,6 +83,20 @@ const categories: Category[] = [
         description: "10+ years experience in crypto investor relations",
         rate: "20 SOL/hr",
         availability: "Available in 1 week"
+      },
+      {
+        name: "Daniel Park",
+        title: "Investment Analyst",
+        description: "Specialized in crypto market analysis and reporting",
+        rate: "18 SOL/hr",
+        availability: "Available Now"
+      },
+      {
+        name: "Rachel Chen",
+        title: "Strategic Partnerships Lead",
+        description: "Expert in building crypto ecosystem partnerships",
+        rate: "19 SOL/hr",
+        availability: "Available in 2 weeks"
       }
     ]
   },
@@ -76,6 +110,20 @@ const categories: Category[] = [
         description: "Experienced in Discord and Telegram community management",
         rate: "6 SOL/hr",
         availability: "Immediately Available"
+      },
+      {
+        name: "Sofia Garcia",
+        title: "Support Specialist",
+        description: "Expert in technical support for crypto platforms",
+        rate: "7 SOL/hr",
+        availability: "Available Now"
+      },
+      {
+        name: "Mark Thompson",
+        title: "Customer Success Manager",
+        description: "Specialized in Web3 user onboarding and retention",
+        rate: "8 SOL/hr",
+        availability: "Available in 1 week"
       }
     ]
   },
@@ -89,6 +137,20 @@ const categories: Category[] = [
         description: "Expert in AI implementation for blockchain projects",
         rate: "18 SOL/hr",
         availability: "Available in 3 weeks"
+      },
+      {
+        name: "Michael Wong",
+        title: "Machine Learning Engineer",
+        description: "Specialized in predictive analytics for crypto",
+        rate: "20 SOL/hr",
+        availability: "Available Now"
+      },
+      {
+        name: "Anna Kumar",
+        title: "AI Research Scientist",
+        description: "Focus on AI applications in DeFi and NFTs",
+        rate: "22 SOL/hr",
+        availability: "Available in 1 week"
       }
     ]
   },
@@ -101,6 +163,20 @@ const categories: Category[] = [
         title: "DeFi Analyst",
         description: "Specialized in DeFi protocols and financial modeling",
         rate: "16 SOL/hr",
+        availability: "Available Now"
+      },
+      {
+        name: "Victoria Chang",
+        title: "Crypto Financial Advisor",
+        description: "Expert in crypto portfolio management",
+        rate: "15 SOL/hr",
+        availability: "Available in 2 weeks"
+      },
+      {
+        name: "Robert Kim",
+        title: "Financial Risk Manager",
+        description: "Specialized in crypto risk assessment and mitigation",
+        rate: "17 SOL/hr",
         availability: "Available Now"
       }
     ]
@@ -115,6 +191,20 @@ const categories: Category[] = [
         description: "Focused on blockchain solutions for social impact",
         rate: "14 SOL/hr",
         availability: "Available in 1 week"
+      },
+      {
+        name: "John Smith",
+        title: "Nonprofit Blockchain Consultant",
+        description: "Expert in implementing crypto donation systems",
+        rate: "13 SOL/hr",
+        availability: "Available Now"
+      },
+      {
+        name: "Sarah Lee",
+        title: "Social Impact Strategist",
+        description: "Specialized in crypto-based charitable initiatives",
+        rate: "15 SOL/hr",
+        availability: "Available in 2 weeks"
       }
     ]
   },
@@ -128,6 +218,20 @@ const categories: Category[] = [
         description: "Specialized in real estate asset tokenization",
         rate: "17 SOL/hr",
         availability: "Available Now"
+      },
+      {
+        name: "Amanda Johnson",
+        title: "Property NFT Specialist",
+        description: "Expert in NFT-based real estate transactions",
+        rate: "16 SOL/hr",
+        availability: "Available in 1 week"
+      },
+      {
+        name: "Michael Brown",
+        title: "Real Estate Smart Contract Developer",
+        description: "Focused on automated property transactions",
+        rate: "18 SOL/hr",
+        availability: "Available in 2 weeks"
       }
     ]
   },
@@ -141,6 +245,20 @@ const categories: Category[] = [
         description: "Expert in scaling Web3 operations",
         rate: "13 SOL/hr",
         availability: "Available in 2 weeks"
+      },
+      {
+        name: "David Chen",
+        title: "Process Optimization Specialist",
+        description: "Focused on Web3 business efficiency",
+        rate: "14 SOL/hr",
+        availability: "Available Now"
+      },
+      {
+        name: "Emily Wang",
+        title: "Project Manager",
+        description: "Specialized in Web3 project delivery",
+        rate: "15 SOL/hr",
+        availability: "Available in 1 week"
       }
     ]
   },
@@ -154,6 +272,20 @@ const categories: Category[] = [
         description: "Specialized in Web3 infrastructure and dApp development",
         rate: "19 SOL/hr",
         availability: "Available Now"
+      },
+      {
+        name: "Lisa Park",
+        title: "Blockchain Systems Engineer",
+        description: "Expert in scalable Web3 solutions",
+        rate: "20 SOL/hr",
+        availability: "Available in 1 week"
+      },
+      {
+        name: "Kevin Zhang",
+        title: "Web3 Integration Specialist",
+        description: "Focused on Web2 to Web3 migrations",
+        rate: "18 SOL/hr",
+        availability: "Available in 2 weeks"
       }
     ]
   },
@@ -167,6 +299,20 @@ const categories: Category[] = [
         description: "Expert in token economic models and incentive design",
         rate: "17.5 SOL/hr",
         availability: "Available in 1 week"
+      },
+      {
+        name: "Alex Thompson",
+        title: "Token Economy Analyst",
+        description: "Specialized in sustainable token models",
+        rate: "16.5 SOL/hr",
+        availability: "Available Now"
+      },
+      {
+        name: "Ryan Kim",
+        title: "Token Strategy Consultant",
+        description: "Expert in token distribution and vesting",
+        rate: "18 SOL/hr",
+        availability: "Available in 2 weeks"
       }
     ]
   }
