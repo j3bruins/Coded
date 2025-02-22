@@ -1,4 +1,3 @@
-
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Lightbulb, BarChart3, ShoppingBag } from "lucide-react";
@@ -79,10 +78,13 @@ const Index = () => {
       </section>
 
       {/* How it Works Section */}
-      <section id="how-it-works" className="py-20 bg-black/30">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-[#00ff41] text-glow">How Coded Works</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+      <section id="how-it-works" className="py-20 bg-black/80 backdrop-blur-md relative overflow-hidden">
+        <div className="absolute inset-0 bg-[#00ff41]/5"></div>
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <h2 className="text-4xl font-bold text-center mb-16 text-[#00ff41] text-glow animate-pulse">
+            How Coded Works
+          </h2>
+          <div className="grid md:grid-cols-3 gap-12">
             {[
               {
                 step: "01",
@@ -100,13 +102,21 @@ const Index = () => {
                 description: "Market your talent & shop around in the marketplace",
               },
             ].map((item, index) => (
-              <div key={index} className="relative matrix-fade-in" style={{ animationDelay: `${index * 0.2}s` }}>
-                <div className="text-6xl font-bold text-[#00ff41]/20 absolute -top-8 -left-4">
+              <div 
+                key={index} 
+                className="relative bg-black/40 p-8 rounded-lg border border-[#00ff41]/30 hover:border-[#00ff41] transition-all duration-300 matrix-border matrix-fade-in group hover:transform hover:scale-105"
+                style={{ animationDelay: `${index * 0.2}s` }}
+              >
+                <div className="text-8xl font-bold text-[#00ff41]/10 absolute -top-10 -left-6 transition-all duration-300 group-hover:text-[#00ff41]/20">
                   {item.step}
                 </div>
                 <div className="relative">
-                  <h3 className="text-xl font-semibold mb-2 text-[#00ff41]">{item.title}</h3>
-                  <p className="text-[#00ff41]/80">{item.description}</p>
+                  <h3 className="text-2xl font-bold mb-4 text-[#00ff41] tracking-wider">
+                    {item.title}
+                  </h3>
+                  <p className="text-lg text-[#00ff41] leading-relaxed opacity-90">
+                    {item.description}
+                  </p>
                 </div>
               </div>
             ))}
