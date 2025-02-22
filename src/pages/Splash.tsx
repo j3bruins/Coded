@@ -17,6 +17,9 @@ const Splash = () => {
           alt="Chain Link" 
           className="w-64 h-auto opacity-80 mix-blend-screen mb-8"
         />
+        <div className="text-[#00ff41] text-2xl tracking-widest">
+          UNLOCK YOUR TALENT
+        </div>
       </div>
 
       {/* Call to Action Button */}
