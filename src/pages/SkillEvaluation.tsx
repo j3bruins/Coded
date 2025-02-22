@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
@@ -37,18 +38,21 @@ const SkillEvaluation = () => {
   useEffect(() => {
     const initAI = async () => {
       try {
-        const { data: { secretValue }, error } = await supabase
+        const { data: { secretValue } = {}, error } = await supabase
           .functions.invoke('get-secret', {
             body: { secretName: 'OPENAI_API_KEY' }
           });
         
-        if (error) throw error;
+        if (error || !secretValue) {
+          throw new Error(error?.message || 'Failed to get OpenAI API key');
+        }
+
         await initializeMaiarAI(secretValue);
       } catch (error) {
         console.error("Failed to initialize Maiar AI:", error);
         toast({
           title: "AI Initialization Error",
-          description: "Failed to initialize the AI evaluation system.",
+          description: "Failed to initialize the AI evaluation system. Please try again later.",
           variant: "destructive",
         });
       }

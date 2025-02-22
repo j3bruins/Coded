@@ -1,9 +1,10 @@
 
-import { createRuntime } from "@maiar-ai/core";
+import { createRuntime, type Runtime } from "@maiar-ai/core";
 import { OpenAIProvider } from "@maiar-ai/model-openai";
 import { PluginTextGeneration } from "@maiar-ai/plugin-text";
+import { MemoryManager } from "@maiar-ai/memory";
 
-let runtime: ReturnType<typeof createRuntime> | null = null;
+let runtime: Runtime | null = null;
 
 export const initializeMaiarAI = async (openAIKey: string) => {
   if (runtime) return runtime;
@@ -11,12 +12,13 @@ export const initializeMaiarAI = async (openAIKey: string) => {
   runtime = createRuntime({
     model: new OpenAIProvider({
       apiKey: openAIKey,
-      model: "gpt-4o-mini" // Using our supported model
+      model: "gpt-4o-mini"
     }),
-    plugins: [new PluginTextGeneration()]
+    plugins: [new PluginTextGeneration()],
+    memory: new MemoryManager()
   });
 
-  await runtime.start();
+  await runtime.initialize();
   return runtime;
 };
 
@@ -43,9 +45,8 @@ export const generateSkillEvaluation = async (
   };
 
   try {
-    const result = await runtime.process({
-      type: "text_generation",
-      input: JSON.stringify(context),
+    const response = await runtime.generate({
+      prompt: JSON.stringify(context),
       parameters: {
         format: "json",
         style: "analytical",
@@ -53,17 +54,19 @@ export const generateSkillEvaluation = async (
       }
     });
 
-    return result;
+    return {
+      evaluation: response.text,
+      recommendedNFTs: response.data?.recommendedNFTs || []
+    };
   } catch (error) {
     console.error("Error in Maiar AI evaluation:", error);
     throw error;
   }
 };
 
-// Cleanup function for runtime
 export const shutdownMaiarAI = async () => {
   if (runtime) {
-    await runtime.stop();
+    await runtime.shutdown();
     runtime = null;
   }
 };
