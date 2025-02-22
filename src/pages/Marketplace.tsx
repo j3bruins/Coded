@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Brain, Code, Megaphone, Briefcase, Headphones, Coins, Heart, Home, Cog, Globe } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
+import { MatrixBackground } from "@/components/MatrixBackground";
 
 interface TalentCard {
   name: string;
@@ -321,8 +322,9 @@ const categories: Category[] = [
 const Marketplace = () => {
   return (
     <div className="min-h-screen bg-background">
+      <MatrixBackground />
       <Navigation />
-      <div className="container mx-auto px-4 py-24">
+      <div className="container mx-auto px-4 py-24 relative z-10">
         <h1 className="text-4xl font-bold mb-12 text-center text-[#00ff41] matrix-border p-4 inline-block">
           Talent Marketplace
         </h1>
