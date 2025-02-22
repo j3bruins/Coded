@@ -1,12 +1,12 @@
-
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Lightbulb, BarChart3 } from "lucide-react";
+import { MatrixBackground } from "@/components/MatrixBackground";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-matrix">
-      <Navigation />
+      <MatrixBackground />
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4">
@@ -125,4 +125,3 @@ const Index = () => {
 };
 
 export default Index;
-

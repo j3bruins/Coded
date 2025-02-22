@@ -39,6 +39,8 @@
     @apply bg-background text-foreground antialiased;
     font-family: 'Share Tech Mono', monospace;
     background: radial-gradient(circle at center, #001a00 0%, #000000 100%);
+    position: relative;
+    overflow-x: hidden;
   }
 
   html {
@@ -51,25 +53,37 @@
     rgba(0, 255, 65, 0.15) 0%,
     rgba(0, 0, 0, 0.95) 100%
   );
+  position: relative;
 }
 
+/* Enhanced text glow for better visibility */
 .text-glow {
   text-shadow: 0 0 10px var(--matrix-green),
                0 0 20px var(--matrix-green),
-               0 0 30px var(--matrix-green);
+               0 0 30px var(--matrix-green),
+               0 0 40px var(--matrix-green);
+  letter-spacing: 0.5px;
 }
 
+/* Enhanced 3D button effect */
 .button-glow {
   box-shadow: 0 0 10px var(--matrix-green),
               0 0 20px var(--matrix-green);
   transition: all 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transform: translateZ(0);
 }
 
 .button-glow:hover {
   box-shadow: 0 0 15px var(--matrix-green),
               0 0 30px var(--matrix-green),
               0 0 45px var(--matrix-green);
-  transform: translateY(-2px);
+  transform: translateY(-3px) translateZ(10px) scale(1.02);
+}
+
+.button-glow:active {
+  transform: translateY(1px) translateZ(5px) scale(0.98);
 }
 
 .matrix-border {
@@ -86,6 +100,45 @@
   bottom: -2px;
   border: 1px solid var(--matrix-green);
   animation: border-pulse 2s infinite;
+}
+
+/* Matrix rain animation */
+.matrix-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.matrix-digit {
+  position: absolute;
+  color: var(--matrix-green);
+  font-size: 20px;
+  animation: matrix-fall 10s linear infinite;
+  text-shadow: 0 0 5px var(--matrix-green);
+  opacity: 0;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+@keyframes matrix-fall {
+  0% {
+    transform: translateY(-100%) translateZ(0) rotateX(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateZ(100px) rotateX(360deg);
+    opacity: 0;
+  }
 }
 
 @keyframes border-pulse {
@@ -105,5 +158,10 @@
 
 .matrix-fade-in {
   animation: matrix-fade 0.5s ease-out forwards;
+}
+
+/* Text outline for better visibility */
+h1, h2, h3, p {
+  -webkit-text-stroke: 0.5px rgba(0, 255, 65, 0.3);
 }
 
