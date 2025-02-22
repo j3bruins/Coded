@@ -12,62 +12,56 @@ export const BreakingChainAnimation = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  return (
-    <div className="flex items-center justify-center perspective-[1000px]">
-      {/* Left Chain Link */}
-      <div className="relative">
-        <div 
-          className={`
-            w-24 h-12 relative
-            transition-all duration-1000 ease-in-out transform-gpu
-            hover:scale-110
-            ${broken ? '-translate-x-8 -rotate-12 translate-z-12' : ''}
-          `}
-          style={{
-            transformStyle: 'preserve-3d',
-          }}
-        >
-          {/* Broken edge effect */}
-          <div className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-8 bg-[#00ff41]/20 blur-sm" />
-          
-          {/* Multiple parallel lines for enhanced 3D effect */}
-          <div className="absolute inset-0 border-[3px] border-[#00ff41] rounded-full transform rotate-45 opacity-30 shadow-[0_0_15px_rgba(0,255,65,0.3)]" />
-          <div className="absolute inset-0 border-[3px] border-[#00ff41] rounded-full transform rotate-45 scale-95 opacity-50 shadow-[0_0_10px_rgba(0,255,65,0.4)]" />
-          <div className="absolute inset-0 border-[3px] border-[#00ff41] rounded-full transform rotate-45 scale-90 opacity-70 shadow-[0_0_8px_rgba(0,255,65,0.5)]" />
-          <div className="absolute inset-0 border-[3px] border-[#00ff41] rounded-full transform rotate-45 scale-85 shadow-[0_0_5px_rgba(0,255,65,0.6)]" />
-          
-          {/* Inner glow and depth effect */}
-          <div className="absolute inset-0 bg-[#00ff41]/5 rounded-full transform rotate-45 animate-pulse" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#00ff41]/10 to-transparent rounded-full transform rotate-45" />
+  const ChainLink = ({ isLeft }: { isLeft: boolean }) => (
+    <div className="relative">
+      <div 
+        className={`
+          w-16 h-24 relative
+          transition-all duration-1000 ease-in-out transform-gpu
+          hover:scale-110
+          ${broken ? (isLeft ? '-translate-x-8 -rotate-12' : 'translate-x-8 rotate-12') : ''}
+        `}
+      >
+        {/* Main outer ring */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-24 bg-[#00ff41] rounded-full" />
+          <div className="absolute top-1/2 -translate-y-1/2 w-16 h-8 bg-[#00ff41] rounded-full" />
         </div>
-      </div>
 
-      {/* Right Chain Link */}
-      <div className="relative -ml-12">
-        <div 
-          className={`
-            w-24 h-12 relative
-            transition-all duration-1000 ease-in-out transform-gpu
-            hover:scale-110
-            ${broken ? 'translate-x-8 rotate-12 translate-z-12' : ''}
-          `}
-          style={{
-            transformStyle: 'preserve-3d',
-          }}
-        >
-          {/* Broken edge effect */}
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-8 bg-[#00ff41]/20 blur-sm" />
-          
-          {/* Multiple parallel lines for enhanced 3D effect */}
-          <div className="absolute inset-0 border-[3px] border-[#00ff41] rounded-full transform rotate-45 opacity-30 shadow-[0_0_15px_rgba(0,255,65,0.3)]" />
-          <div className="absolute inset-0 border-[3px] border-[#00ff41] rounded-full transform rotate-45 scale-95 opacity-50 shadow-[0_0_10px_rgba(0,255,65,0.4)]" />
-          <div className="absolute inset-0 border-[3px] border-[#00ff41] rounded-full transform rotate-45 scale-90 opacity-70 shadow-[0_0_8px_rgba(0,255,65,0.5)]" />
-          <div className="absolute inset-0 border-[3px] border-[#00ff41] rounded-full transform rotate-45 scale-85 shadow-[0_0_5px_rgba(0,255,65,0.6)]" />
-          
-          {/* Inner glow and depth effect */}
-          <div className="absolute inset-0 bg-[#00ff41]/5 rounded-full transform rotate-45 animate-pulse" />
-          <div className="absolute inset-0 bg-gradient-to-l from-[#00ff41]/10 to-transparent rounded-full transform rotate-45" />
+        {/* Inner cutout */}
+        <div className="absolute inset-[3px]">
+          <div className="absolute top-[3px] left-1/2 -translate-x-1/2 w-6 h-[90px] bg-black rounded-full" />
+          <div className="absolute top-1/2 -translate-y-1/2 w-[58px] h-6 bg-black rounded-full" />
         </div>
+
+        {/* Metallic effect overlay */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-24 rounded-full bg-gradient-to-b from-[#00ff41]/50 to-transparent" />
+          <div className="absolute top-1/2 -translate-y-1/2 w-16 h-8 rounded-full bg-gradient-to-r from-[#00ff41]/50 via-transparent to-[#00ff41]/50" />
+        </div>
+
+        {/* Glow effect */}
+        <div className="absolute inset-0 filter blur-[2px]">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-24 bg-[#00ff41]/20 rounded-full" />
+          <div className="absolute top-1/2 -translate-y-1/2 w-16 h-8 bg-[#00ff41]/20 rounded-full" />
+        </div>
+
+        {/* Break effect */}
+        {broken && (
+          <div 
+            className={`absolute ${isLeft ? 'right-0' : 'left-0'} top-1/2 -translate-y-1/2 
+              w-4 h-16 bg-[#00ff41]/30 blur-md`}
+          />
+        )}
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="flex items-center justify-center">
+      <ChainLink isLeft={true} />
+      <div className="-ml-8">
+        <ChainLink isLeft={false} />
       </div>
     </div>
   );
