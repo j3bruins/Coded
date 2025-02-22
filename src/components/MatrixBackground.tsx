@@ -28,36 +28,36 @@ export const MatrixBackground = () => {
     ctx.font = `${fontSize}px 'Share Tech Mono'`;
 
     const animate = () => {
-      // Create more pronounced trail effect with slower fade
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Reduced opacity for slower fade
+      // Create a moderate trail effect
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Reduce the glow effect
+      // Moderate glow effect
       ctx.shadowBlur = 1;
       ctx.shadowColor = 'rgba(0, 255, 65, 0.3)';
 
       for (let i = 0; i < drops.length; i++) {
-        // Only update every few frames to slow down the movement
-        if (Math.random() > 0.975) { // Reduced probability of updating
+        // Update with 50% reduced frequency
+        if (Math.random() > 0.5) { // Moderate probability of updating
           const char = characters[Math.floor(Math.random() * characters.length)];
           const x = i * fontSize;
           const y = drops[i] * fontSize;
 
-          // Reduce the opacity of characters
+          // Moderate opacity
           const opacity = Math.random() * 0.3 + 0.2;
           ctx.fillStyle = `rgba(0, 255, 65, ${opacity})`;
           ctx.fillText(char, x, y);
 
-          // Adjust stream behavior
-          if (y > canvas.height && Math.random() > 0.99) { // Reduced probability of resetting
+          // Moderately adjusted stream behavior
+          if (y > canvas.height && Math.random() > 0.985) { // Original reset probability
             drops[i] = 0;
           }
           drops[i]++;
         }
       }
 
-      // Reduce frequency of new streams
-      if (Math.random() > 0.995) { // Reduced probability of new streams
+      // Moderate frequency of new streams
+      if (Math.random() > 0.97) { // Original new stream probability
         const randomColumn = Math.floor(Math.random() * drops.length);
         drops[randomColumn] = 0;
       }
