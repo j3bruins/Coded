@@ -28,8 +28,8 @@ export const MatrixBackground = () => {
     ctx.font = `${fontSize}px 'Share Tech Mono'`;
 
     const animate = () => {
-      // Create more pronounced trail effect with darker background
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      // Create more pronounced trail effect with slower fade
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Reduced opacity for slower fade
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Reduce the glow effect
@@ -37,24 +37,27 @@ export const MatrixBackground = () => {
       ctx.shadowColor = 'rgba(0, 255, 65, 0.3)';
 
       for (let i = 0; i < drops.length; i++) {
-        const char = characters[Math.floor(Math.random() * characters.length)];
-        const x = i * fontSize;
-        const y = drops[i] * fontSize;
+        // Only update every few frames to slow down the movement
+        if (Math.random() > 0.975) { // Reduced probability of updating
+          const char = characters[Math.floor(Math.random() * characters.length)];
+          const x = i * fontSize;
+          const y = drops[i] * fontSize;
 
-        // Reduce the opacity of characters
-        const opacity = Math.random() * 0.3 + 0.2; // Random opacity between 0.2 and 0.5
-        ctx.fillStyle = `rgba(0, 255, 65, ${opacity})`;
-        ctx.fillText(char, x, y);
+          // Reduce the opacity of characters
+          const opacity = Math.random() * 0.3 + 0.2;
+          ctx.fillStyle = `rgba(0, 255, 65, ${opacity})`;
+          ctx.fillText(char, x, y);
 
-        // Adjust stream behavior
-        if (y > canvas.height && Math.random() > 0.985) {
-          drops[i] = 0;
+          // Adjust stream behavior
+          if (y > canvas.height && Math.random() > 0.99) { // Reduced probability of resetting
+            drops[i] = 0;
+          }
+          drops[i]++;
         }
-        drops[i]++;
       }
 
       // Reduce frequency of new streams
-      if (Math.random() > 0.97) {
+      if (Math.random() > 0.995) { // Reduced probability of new streams
         const randomColumn = Math.floor(Math.random() * drops.length);
         drops[randomColumn] = 0;
       }
