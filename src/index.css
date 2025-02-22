@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,26 +7,28 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 263 84% 50%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 142 70% 58%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --matrix-green: #00ff41;
+    --matrix-dark: #000000;
+    --background: 0 0% 0%;
+    --foreground: 150 100% 50%;
+    --card: 0 0% 3%;
+    --card-foreground: 150 100% 50%;
+    --popover: 0 0% 3%;
+    --popover-foreground: 150 100% 50%;
+    --primary: 150 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 150 80% 30%;
+    --secondary-foreground: 150 100% 50%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 150 70% 40%;
+    --accent: 150 100% 50%;
+    --accent-foreground: 0 0% 0%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 263 84% 50%;
-    --radius: 0.75rem;
+    --destructive-foreground: 0 0% 0%;
+    --border: 150 80% 30%;
+    --input: 150 80% 30%;
+    --ring: 150 100% 50%;
+    --radius: 0.5rem;
   }
 
   * {
@@ -35,7 +37,8 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Share Tech Mono', monospace;
+    background: radial-gradient(circle at center, #001a00 0%, #000000 100%);
   }
 
   html {
@@ -43,10 +46,64 @@
   }
 }
 
-.bg-gradient-primary {
-  @apply bg-gradient-to-r from-primary to-secondary;
+.bg-matrix {
+  background: linear-gradient(180deg, 
+    rgba(0, 255, 65, 0.15) 0%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
 }
 
-.text-gradient-primary {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+.text-glow {
+  text-shadow: 0 0 10px var(--matrix-green),
+               0 0 20px var(--matrix-green),
+               0 0 30px var(--matrix-green);
 }
+
+.button-glow {
+  box-shadow: 0 0 10px var(--matrix-green),
+              0 0 20px var(--matrix-green);
+  transition: all 0.3s ease;
+}
+
+.button-glow:hover {
+  box-shadow: 0 0 15px var(--matrix-green),
+              0 0 30px var(--matrix-green),
+              0 0 45px var(--matrix-green);
+  transform: translateY(-2px);
+}
+
+.matrix-border {
+  position: relative;
+  border: 1px solid var(--matrix-green);
+}
+
+.matrix-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 1px solid var(--matrix-green);
+  animation: border-pulse 2s infinite;
+}
+
+@keyframes border-pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes matrix-fade {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.matrix-fade-in {
+  animation: matrix-fade 0.5s ease-out forwards;
+}
+

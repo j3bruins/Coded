@@ -7,26 +7,26 @@ export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed w-full bg-white/80 backdrop-blur-md z-50 border-b">
+    <nav className="fixed w-full bg-black/80 backdrop-blur-md z-50 border-b border-[#00ff41]/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+            <span className="text-2xl font-bold text-[#00ff41] text-glow">
               TokenifyTalents
             </span>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-gray-700 hover:text-primary transition-colors">
+            <a href="#features" className="text-[#00ff41]/80 hover:text-[#00ff41] transition-colors">
               Features
             </a>
-            <a href="#how-it-works" className="text-gray-700 hover:text-primary transition-colors">
+            <a href="#how-it-works" className="text-[#00ff41]/80 hover:text-[#00ff41] transition-colors">
               How it Works
             </a>
             <Button
-              variant="default"
-              className="bg-primary hover:bg-primary/90 text-white"
+              variant="outline"
+              className="border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 matrix-border"
             >
               Connect Wallet
             </Button>
@@ -36,7 +36,7 @@ export const Navigation = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-primary"
+              className="text-[#00ff41] hover:text-[#00ff41]/80"
             >
               {isOpen ? (
                 <X className="h-6 w-6" />
@@ -51,24 +51,24 @@ export const Navigation = () => {
       {/* Mobile Navigation */}
       {isOpen && (
         <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-b">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/90 border-b border-[#00ff41]/30">
             <a
               href="#features"
-              className="block px-3 py-2 text-gray-700 hover:text-primary transition-colors"
+              className="block px-3 py-2 text-[#00ff41]/80 hover:text-[#00ff41] transition-colors"
               onClick={() => setIsOpen(false)}
             >
               Features
             </a>
             <a
               href="#how-it-works"
-              className="block px-3 py-2 text-gray-700 hover:text-primary transition-colors"
+              className="block px-3 py-2 text-[#00ff41]/80 hover:text-[#00ff41] transition-colors"
               onClick={() => setIsOpen(false)}
             >
               How it Works
             </a>
             <Button
-              variant="default"
-              className="w-full mt-2 bg-primary hover:bg-primary/90 text-white"
+              variant="outline"
+              className="w-full mt-2 border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 matrix-border"
             >
               Connect Wallet
             </Button>
@@ -78,3 +78,4 @@ export const Navigation = () => {
     </nav>
   );
 };
+
