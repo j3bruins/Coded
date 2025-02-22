@@ -5,11 +5,13 @@ import { Button } from "./ui/button";
 import { Loader2, Wallet } from "lucide-react";
 
 export const WalletButton = () => {
-  const { wallet, connecting, connected, publicKey } = useWallet();
+  const { wallet, disconnect, connecting, connected, publicKey } = useWallet();
   const { setVisible } = useWalletModal();
 
   const handleClick = () => {
-    if (!wallet) {
+    if (connected) {
+      disconnect();
+    } else {
       setVisible(true);
     }
   };
@@ -39,3 +41,4 @@ export const WalletButton = () => {
     </Button>
   );
 };
+

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { WalletButton } from "./WalletButton";
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,12 +30,7 @@ export const Navigation = () => {
             <a href="#validator" className="text-[#00ff41]/80 hover:text-[#00ff41] transition-colors">
               Validator
             </a>
-            <Button
-              variant="outline"
-              className="border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 matrix-border"
-            >
-              Connect Wallet
-            </Button>
+            <WalletButton />
           </div>
 
           {/* Mobile menu button */}
@@ -78,15 +74,13 @@ export const Navigation = () => {
             >
               Validator
             </a>
-            <Button
-              variant="outline"
-              className="w-full mt-2 border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 matrix-border"
-            >
-              Connect Wallet
-            </Button>
+            <div className="px-3 py-2">
+              <WalletButton />
+            </div>
           </div>
         </div>
       )}
     </nav>
   );
 };
+

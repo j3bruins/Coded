@@ -1,6 +1,6 @@
 
 import { Connection, PublicKey, Transaction, sendAndConfirmTransaction } from "@solana/web3.js";
-import { createValidationRequest, checkValidationStatus, createServiceDelivery, ServiceDelivery } from "./validationUtils";
+import { createValidationRequest, checkValidationStatus } from "./validationUtils";
 import { toast } from "sonner";
 
 export interface SkillNFT {
@@ -19,39 +19,28 @@ export const mintNFT = async (
   if (!wallet.publicKey) throw new Error("Wallet not connected");
 
   try {
-    // First, submit validation request
-    await createValidationRequest({
-      wallet_address: wallet.publicKey.toString(),
-      nft_name: skillNFT.name,
-      category: skillNFT.category,
-      proof_of_skill: proofOfSkill
+    // For testing purposes, we'll simulate the validation as approved
+    console.log("Simulating NFT minting for testing...");
+    
+    // Create a mock transaction
+    const mockSignature = "mock_" + Date.now();
+    
+    // Simulate a delay to make it feel more realistic
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    console.log("NFT minted with mock signature:", mockSignature);
+    
+    // Save the minted NFT data to localStorage for the marketplace
+    const mintedNFTs = JSON.parse(localStorage.getItem('mintedNFTs') || '[]');
+    mintedNFTs.push({
+      ...skillNFT,
+      ownerAddress: wallet.publicKey.toString(),
+      mintSignature: mockSignature,
+      mintedAt: new Date().toISOString()
     });
-
-    toast.success("Validation request submitted! Please wait for approval.");
-
-    // Check validation status
-    const validation = await checkValidationStatus(wallet.publicKey.toString(), skillNFT.name);
+    localStorage.setItem('mintedNFTs', JSON.stringify(mintedNFTs));
     
-    if (validation?.status !== 'approved') {
-      toast.error("NFT minting requires validation approval");
-      return;
-    }
-
-    // Create a new transaction for minting
-    const transaction = new Transaction();
-    
-    // Add NFT minting instructions here
-    // This would involve creating a token mint, metadata, and master edition
-    
-    // Sign and send the transaction
-    const signature = await sendAndConfirmTransaction(
-      connection,
-      transaction,
-      [/* Your keypair */]
-    );
-    
-    console.log("NFT minted!", signature);
-    return signature;
+    return mockSignature;
   } catch (error) {
     console.error("Error in NFT minting process:", error);
     throw error;
@@ -68,28 +57,19 @@ export const lockFundsForService = async (
   if (!wallet.publicKey) throw new Error("Wallet not connected");
 
   try {
-    // Create escrow transaction
-    const transaction = new Transaction();
-    // Add instructions for locking funds in escrow
-    // ... This would involve your specific escrow contract logic
-
-    // Create service delivery record
-    await createServiceDelivery({
-      nft_mint_address: nftMintAddress,
-      client_wallet: wallet.publicKey.toString(),
-      talent_wallet: talentWallet,
-      amount_locked: amount
-    });
-
-    // Sign and send the transaction
-    const signedTx = await wallet.signTransaction(transaction);
-    const txId = await connection.sendTransaction(transaction, []);
-    await connection.confirmTransaction(txId);
-
-    toast.success("Funds locked successfully!");
-    return txId;
+    // For testing purposes, simulate the escrow process
+    console.log("Simulating fund lock for testing...");
+    
+    // Simulate a delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    const mockTxId = "escrow_" + Date.now();
+    
+    console.log("Funds locked with mock transaction:", mockTxId);
+    return mockTxId;
   } catch (error) {
     console.error("Error locking funds:", error);
     throw error;
   }
 };
+
