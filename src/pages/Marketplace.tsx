@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Brain, Code, Megaphone, Briefcase, Headphones, DollarSign, Heart, Home, Cog, Globe, Coins } from "lucide-react";
+import { Brain, Code, Megaphone, Briefcase, Headphones, Coins, Heart, Home, Cog, Globe } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
 
 interface TalentCard {
@@ -28,14 +28,14 @@ const categories: Category[] = [
         name: "Alex Smith",
         title: "Senior Blockchain Developer",
         description: "Specialized in Solidity and Web3 development with 5+ years experience",
-        rate: "$150/hr",
+        rate: "15 SOL/hr",
         availability: "Available in 2 weeks"
       },
       {
         name: "Sarah Johnson",
         title: "Full Stack Developer",
         description: "Expert in React, Node.js, and blockchain integration",
-        rate: "$120/hr",
+        rate: "12 SOL/hr",
         availability: "Immediately Available"
       }
     ]
@@ -48,7 +48,7 @@ const categories: Category[] = [
         name: "Mike Brown",
         title: "Web3 Marketing Strategist",
         description: "Specializing in crypto and NFT marketing campaigns",
-        rate: "$100/hr",
+        rate: "10 SOL/hr",
         availability: "Available Now"
       }
     ]
@@ -61,7 +61,7 @@ const categories: Category[] = [
         name: "Emma Wilson",
         title: "IR Specialist",
         description: "10+ years experience in crypto investor relations",
-        rate: "$200/hr",
+        rate: "20 SOL/hr",
         availability: "Available in 1 week"
       }
     ]
@@ -74,7 +74,7 @@ const categories: Category[] = [
         name: "David Lee",
         title: "Community Manager",
         description: "Experienced in Discord and Telegram community management",
-        rate: "$60/hr",
+        rate: "6 SOL/hr",
         availability: "Immediately Available"
       }
     ]
@@ -87,20 +87,20 @@ const categories: Category[] = [
         name: "Lisa Chen",
         title: "AI Integration Specialist",
         description: "Expert in AI implementation for blockchain projects",
-        rate: "$180/hr",
+        rate: "18 SOL/hr",
         availability: "Available in 3 weeks"
       }
     ]
   },
   {
     name: "Finance",
-    icon: <DollarSign className="w-6 h-6" />,
+    icon: <Coins className="w-6 h-6" />,
     talents: [
       {
         name: "James Wilson",
         title: "DeFi Analyst",
         description: "Specialized in DeFi protocols and financial modeling",
-        rate: "$160/hr",
+        rate: "16 SOL/hr",
         availability: "Available Now"
       }
     ]
@@ -113,7 +113,7 @@ const categories: Category[] = [
         name: "Maria Garcia",
         title: "Impact Investment Advisor",
         description: "Focused on blockchain solutions for social impact",
-        rate: "$140/hr",
+        rate: "14 SOL/hr",
         availability: "Available in 1 week"
       }
     ]
@@ -126,7 +126,7 @@ const categories: Category[] = [
         name: "Robert Taylor",
         title: "Real Estate Tokenization Expert",
         description: "Specialized in real estate asset tokenization",
-        rate: "$170/hr",
+        rate: "17 SOL/hr",
         availability: "Available Now"
       }
     ]
@@ -139,7 +139,7 @@ const categories: Category[] = [
         name: "Jennifer Kim",
         title: "Operations Manager",
         description: "Expert in scaling Web3 operations",
-        rate: "$130/hr",
+        rate: "13 SOL/hr",
         availability: "Available in 2 weeks"
       }
     ]
@@ -152,7 +152,7 @@ const categories: Category[] = [
         name: "Tom Anderson",
         title: "Web3 Architect",
         description: "Specialized in Web3 infrastructure and dApp development",
-        rate: "$190/hr",
+        rate: "19 SOL/hr",
         availability: "Available Now"
       }
     ]
@@ -165,7 +165,7 @@ const categories: Category[] = [
         name: "Sophie Martinez",
         title: "Tokenomics Designer",
         description: "Expert in token economic models and incentive design",
-        rate: "$175/hr",
+        rate: "17.5 SOL/hr",
         availability: "Available in 1 week"
       }
     ]

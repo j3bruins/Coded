@@ -5,7 +5,7 @@ export interface SkillNFT {
   name: string;
   category: string;
   description: string;
-  suggestedPrice: string;
+  suggestedPrice: string;  // Price in SOL
 }
 
 export const mintNFT = async (
