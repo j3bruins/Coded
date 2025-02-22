@@ -10,90 +10,46 @@ const Splash = () => {
     <div className="min-h-screen bg-matrix flex flex-col items-center justify-center relative overflow-hidden">
       <MatrixBackground />
       
-      {/* 3D Chain Links Breaking Animation */}
+      {/* Matrix Chain Link Icon with Animation */}
       <div className="relative mb-8 animate-float w-48 h-48">
         <div className="absolute inset-0 blur-lg bg-[#00ff41]/20"></div>
         <svg
           viewBox="0 0 100 100"
           className="w-full h-full filter drop-shadow-[0_0_15px_rgba(0,255,65,0.8)]"
         >
-          {/* First Chain Link Breaking */}
+          {/* First Chain Link */}
           <g className="animate-pulse" style={{ animationDelay: '0.5s' }}>
-            {/* Main Link Body - More tubular shape */}
             <path
-              d="M20,40 C20,32 28,32 35,40 
-                 L35,60 C28,68 20,68 20,60 
-                 L20,40 
-                 M20,40 C20,48 28,48 35,40
-                 M20,60 C20,52 28,52 35,60"
+              d="M35,30 L50,30 C60,30 70,40 70,50 C70,60 60,70 50,70 L35,70 C25,70 15,60 15,50 C15,40 25,30 35,30"
+              fill="none"
+              stroke="#00ff41"
+              strokeWidth="4"
+              className="opacity-70"
+            />
+            <path
+              d="M33,35 L50,35 C57,35 65,42 65,50 C65,58 57,65 50,65 L33,65 C26,65 18,58 18,50 C18,42 26,35 33,35"
               fill="none"
               stroke="#00ff41"
               strokeWidth="2"
-              className="opacity-80"
-            />
-            {/* Breaking Point with more detail */}
-            <path
-              d="M35,40 C42,32 50,32 50,40"
-              fill="none"
-              stroke="#00ff41"
-              strokeWidth="2"
-              className="opacity-90 animate-[float_2s_ease-in-out_infinite]"
-            />
-            {/* Matrix-style inner details */}
-            <path
-              d="M22,45 L33,45 M22,55 L33,55"
-              stroke="#00ff41"
-              strokeWidth="0.5"
-              className="opacity-40"
-            />
-            {/* Breaking Pieces with Matrix effect */}
-            <path
-              d="M35,42 L38,40 M39,41 L41,39"
-              fill="none"
-              stroke="#00ff41"
-              strokeWidth="1"
-              className="animate-[float_1.5s_ease-in-out_infinite]"
-              strokeDasharray="2,2"
+              className="opacity-90"
             />
           </g>
-
-          {/* Second Chain Link Breaking */}
-          <g className="animate-pulse" transform="translate(25,0)">
-            {/* Main Link Body - More tubular shape */}
+          
+          {/* Second Chain Link */}
+          <g className="animate-pulse">
             <path
-              d="M65,40 C65,32 57,32 50,40 
-                 L50,60 C57,68 65,68 65,60 
-                 L65,40
-                 M65,40 C65,48 57,48 50,40
-                 M65,60 C65,52 57,52 50,60"
+              d="M50,30 L65,30 C75,30 85,40 85,50 C85,60 75,70 65,70 L50,70 C40,70 30,60 30,50 C30,40 40,30 50,30"
+              fill="none"
+              stroke="#00ff41"
+              strokeWidth="4"
+              className="opacity-70"
+            />
+            <path
+              d="M48,35 L65,35 C72,35 80,42 80,50 C80,58 72,65 65,65 L48,65 C41,65 33,58 33,50 C33,42 41,35 48,35"
               fill="none"
               stroke="#00ff41"
               strokeWidth="2"
-              className="opacity-80"
-            />
-            {/* Breaking Point with more detail */}
-            <path
-              d="M50,60 C43,68 35,68 35,60"
-              fill="none"
-              stroke="#00ff41"
-              strokeWidth="2"
-              className="opacity-90 animate-[float_2s_ease-in-out_infinite]"
-            />
-            {/* Matrix-style inner details */}
-            <path
-              d="M52,45 L63,45 M52,55 L63,55"
-              stroke="#00ff41"
-              strokeWidth="0.5"
-              className="opacity-40"
-            />
-            {/* Breaking Pieces with Matrix effect */}
-            <path
-              d="M48,58 L45,60 M44,61 L42,63"
-              fill="none"
-              stroke="#00ff41"
-              strokeWidth="1"
-              className="animate-[float_1.5s_ease-in-out_infinite]"
-              strokeDasharray="2,2"
+              className="opacity-90"
             />
           </g>
 
@@ -116,6 +72,7 @@ const Splash = () => {
         </svg>
       </div>
 
+      {/* Button with Matrix Style */}
       <Button
         onClick={() => navigate('/main')}
         className="mt-8 px-8 py-6 text-xl bg-transparent border-2 border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 transition-all duration-300 button-glow matrix-border"
