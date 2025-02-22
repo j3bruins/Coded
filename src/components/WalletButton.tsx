@@ -3,6 +3,9 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { Button } from "./ui/button";
 import { Loader2, Wallet } from "lucide-react";
+import { toast } from "sonner";
+
+require("@solana/wallet-adapter-react-ui/styles.css");
 
 export const WalletButton = () => {
   const { wallet, disconnect, connecting, connected, publicKey } = useWallet();
@@ -11,15 +14,22 @@ export const WalletButton = () => {
   const handleClick = () => {
     if (connected) {
       disconnect();
+      toast.success("Wallet disconnected");
     } else {
-      setVisible(true);
+      try {
+        setVisible(true);
+      } catch (error) {
+        console.error("Wallet connection error:", error);
+        toast.error("Failed to connect wallet. Please try again.");
+      }
     }
   };
 
   return (
     <Button
       onClick={handleClick}
-      className="bg-[#00ff41] text-black hover:bg-[#00ff41]/90 button-glow"
+      className="bg-[#00ff41] text-black hover:bg-[#00ff41]/90 button-glow relative"
+      disabled={connecting}
     >
       {connecting ? (
         <>
@@ -41,4 +51,3 @@ export const WalletButton = () => {
     </Button>
   );
 };
-
