@@ -42,9 +42,9 @@ export const BreakingChainAnimation = () => {
         <img 
           src={processedImageUrl || '/lovable-uploads/8f40772d-736b-4ab1-b43c-0ea103a55cf6.png'}
           alt="Interconnected rings"
-          className="w-full h-full object-contain mix-blend-screen opacity-40"
+          className="w-full h-full object-contain mix-blend-screen opacity-60"
           style={{ 
-            filter: 'brightness(1.7) saturate(1.4) drop-shadow(0 0 10px rgba(0, 255, 65, 0.3))'
+            filter: 'brightness(1.5) saturate(1.2) drop-shadow(0 0 8px rgba(0, 255, 65, 0.5))'
           }}
         />
       </div>
