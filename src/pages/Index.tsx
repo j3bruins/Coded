@@ -45,7 +45,7 @@ const Index = () => {
       {/* Features Section */}
       <section id="features" className="py-20 bg-black/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-[#00ff41] text-glow">Why Choose TokenifyTalents</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-[#00ff41] text-glow">Why Coded?</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
