@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
@@ -6,10 +5,13 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Upload, FileText, Linkedin, Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
+import { Upload, FileText, Linkedin, Loader2, AlertCircle, CheckCircle2, Coins } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
+import { WalletButton } from "@/components/WalletButton";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { mintNFT } from "@/utils/nftUtils";
 
 interface SkillNFT {
   name: string;
@@ -28,6 +30,8 @@ const SkillEvaluation = () => {
   const [recommendedNFTs, setRecommendedNFTs] = useState<SkillNFT[]>([]);
   const [selectedNFTs, setSelectedNFTs] = useState<SkillNFT[]>([]);
   const { toast } = useToast();
+  const { connection } = useConnection();
+  const wallet = useWallet();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -65,7 +69,6 @@ const SkillEvaluation = () => {
       return;
     }
 
-    // Here you would integrate with your marketplace
     toast({
       title: "Skills Added to Marketplace",
       description: `${selectedNFTs.length} skills have been prepared for tokenization`,
@@ -104,7 +107,6 @@ const SkillEvaluation = () => {
 
       setEvaluation(data.evaluation);
       
-      // Parse recommended NFTs from the evaluation
       if (data.recommendedNFTs) {
         setRecommendedNFTs(data.recommendedNFTs);
       }
@@ -125,28 +127,70 @@ const SkillEvaluation = () => {
     }
   };
 
+  const handleMintNFT = async (nft: SkillNFT) => {
+    if (!wallet.connected) {
+      toast({
+        title: "Wallet Not Connected",
+        description: "Please connect your Phantom wallet to mint NFTs",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const signature = await mintNFT(connection, wallet, nft);
+      
+      toast({
+        title: "NFT Minted Successfully!",
+        description: `Your skill "${nft.name}" has been minted as an NFT`,
+      });
+      
+      toast({
+        title: "NFT Minted Successfully!",
+        description: `Your skill "${nft.name}" has been minted as an NFT`,
+      });
+      
+      // Here you would update the marketplace with the new NFT
+      // This could involve calling a Supabase function or updating the database
+      
+    } catch (error) {
+      console.error("Error minting NFT:", error);
+      toast({
+        title: "Minting Failed",
+        description: "There was an error minting your NFT. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-matrix">
       <Navigation />
       <div className="max-w-4xl mx-auto px-4 pt-32 pb-20">
         <Card className="bg-black/80 backdrop-blur-md border-[#00ff41]/30 text-[#00ff41]">
           <CardHeader>
-            <h2 className="text-3xl font-bold text-center text-[#00ff41] text-glow">
-              Skill Evaluation & Tokenization
-            </h2>
+            <div className="flex justify-between items-center">
+              <h2 className="text-3xl font-bold text-[#00ff41] text-glow">
+                Skill Evaluation & Tokenization
+              </h2>
+              <WalletButton />
+            </div>
             <p className="text-center text-[#00ff41]/80 mt-2">
               Let our AI analyze your professional profile and recommend the best tokenization strategy
             </p>
           </CardHeader>
           <CardContent>
+            {formError && (
+              <div className="flex items-center gap-2 p-3 rounded bg-red-950/50 border border-red-500/50 text-red-400">
+                <AlertCircle className="w-5 h-5" />
+                <p>{formError}</p>
+              </div>
+            )}
+            
             <form onSubmit={handleSubmit} className="space-y-6">
-              {formError && (
-                <div className="flex items-center gap-2 p-3 rounded bg-red-950/50 border border-red-500/50 text-red-400">
-                  <AlertCircle className="w-5 h-5" />
-                  <p>{formError}</p>
-                </div>
-              )}
-              
               <div className="space-y-2">
                 <Label htmlFor="linkedin" className="text-[#00ff41]">LinkedIn Profile URL (Optional)</Label>
                 <div className="flex items-center space-x-2">
@@ -229,15 +273,14 @@ const SkillEvaluation = () => {
                       {recommendedNFTs.map((nft, index) => (
                         <div
                           key={index}
-                          onClick={() => handleNFTSelection(nft)}
-                          className={`p-4 border rounded-lg cursor-pointer transition-all duration-200 ${
+                          className={`p-4 border rounded-lg ${
                             selectedNFTs.some(item => item.name === nft.name)
                               ? 'border-[#00ff41] bg-[#00ff41]/10'
                               : 'border-[#00ff41]/30 hover:border-[#00ff41]/60'
                           }`}
                         >
                           <div className="flex justify-between items-start">
-                            <div>
+                            <div className="flex-1">
                               <h4 className="font-semibold text-[#00ff41]">{nft.name}</h4>
                               <p className="text-sm text-[#00ff41]/70">{nft.description}</p>
                               <div className="mt-2 flex gap-2">
@@ -249,9 +292,27 @@ const SkillEvaluation = () => {
                                 </Badge>
                               </div>
                             </div>
-                            {selectedNFTs.some(item => item.name === nft.name) && (
-                              <CheckCircle2 className="w-6 h-6 text-[#00ff41]" />
-                            )}
+                            <div className="flex gap-2">
+                              <Button
+                                onClick={() => handleNFTSelection(nft)}
+                                variant="outline"
+                                className="border-[#00ff41]/50 text-[#00ff41] hover:bg-[#00ff41]/10"
+                              >
+                                {selectedNFTs.some(item => item.name === nft.name) ? (
+                                  <CheckCircle2 className="w-5 h-5" />
+                                ) : (
+                                  "Select"
+                                )}
+                              </Button>
+                              <Button
+                                onClick={() => handleMintNFT(nft)}
+                                disabled={isLoading}
+                                className="bg-[#00ff41] text-black hover:bg-[#00ff41]/90 button-glow"
+                              >
+                                <Coins className="w-4 h-4 mr-2" />
+                                Mint NFT
+                              </Button>
+                            </div>
                           </div>
                         </div>
                       ))}

@@ -9,23 +9,26 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Marketplace from "./pages/Marketplace";
 import SkillEvaluation from "./pages/SkillEvaluation";
+import { SolanaProvider } from "./components/SolanaProvider";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Splash />} />
-          <Route path="/main" element={<Index />} />
-          <Route path="/marketplace" element={<Marketplace />} />
-          <Route path="/skill-evaluation" element={<SkillEvaluation />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-      <Toaster />
-      <Sonner />
+      <SolanaProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Splash />} />
+            <Route path="/main" element={<Index />} />
+            <Route path="/marketplace" element={<Marketplace />} />
+            <Route path="/skill-evaluation" element={<SkillEvaluation />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+        <Toaster />
+        <Sonner />
+      </SolanaProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
