@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { WalletButton } from "@/components/WalletButton";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { mintNFT } from "@/utils/nftUtils";
+import { initializeMaiarAI, generateSkillEvaluation, shutdownMaiarAI } from "@/utils/maiarAI";
 
 interface SkillNFT {
   name: string;
@@ -32,6 +33,32 @@ const SkillEvaluation = () => {
   const { toast } = useToast();
   const { connection } = useConnection();
   const wallet = useWallet();
+
+  useEffect(() => {
+    const initAI = async () => {
+      try {
+        const { data: { secretValue }, error } = await supabase
+          .functions.invoke('get-secret', {
+            body: { secretName: 'OPENAI_API_KEY' }
+          });
+        
+        if (error) throw error;
+        await initializeMaiarAI(secretValue);
+      } catch (error) {
+        console.error("Failed to initialize Maiar AI:", error);
+        toast({
+          title: "AI Initialization Error",
+          description: "Failed to initialize the AI evaluation system.",
+          variant: "destructive",
+        });
+      }
+    };
+
+    initAI();
+    return () => {
+      shutdownMaiarAI();
+    };
+  }, []);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -90,30 +117,21 @@ const SkillEvaluation = () => {
     setIsLoading(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke('generate-evaluation', {
-        body: {
-          linkedinProfile,
-          additionalInfo,
-        },
-      });
+      const result = await generateSkillEvaluation(
+        linkedinProfile,
+        additionalInfo,
+        resume ? await resume.text() : undefined
+      );
 
-      if (error) {
-        throw error;
-      }
-
-      if (!data?.evaluation) {
-        throw new Error('No evaluation data received');
-      }
-
-      setEvaluation(data.evaluation);
+      setEvaluation(result.evaluation);
       
-      if (data.recommendedNFTs) {
-        setRecommendedNFTs(data.recommendedNFTs);
+      if (result.recommendedNFTs) {
+        setRecommendedNFTs(result.recommendedNFTs);
       }
 
       toast({
         title: "Evaluation Complete",
-        description: "Your skill evaluation has been generated successfully.",
+        description: "Your skill evaluation has been generated using advanced AI analysis.",
       });
     } catch (error) {
       console.error("Error evaluating skills:", error);
