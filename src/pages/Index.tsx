@@ -106,7 +106,7 @@ const Index = () => {
                 </div>
                 <div className="relative">
                   <h3 className="text-xl font-semibold mb-2 text-black">{item.title}</h3>
-                  <p className="text-black/70">{item.description}</p>
+                  <p className="text-black font-medium">{item.description}</p>
                 </div>
               </div>
             ))}
