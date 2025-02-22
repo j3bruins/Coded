@@ -22,29 +22,35 @@ serve(async (req) => {
       throw new Error('OpenAI API key is not configured');
     }
 
-    const prompt = `As an AI talent evaluator, analyze the following professional information:
+    const prompt = `As an AI skill evaluator focused on tokenization, analyze this professional information:
 
 LinkedIn Profile: ${linkedinProfile || 'Not provided'}
 Additional Information: ${additionalInfo || 'Not provided'}
 
-Please provide a detailed evaluation of the professional profile and recommend specific skills that could be tokenized as NFTs. Structure your response in the following format:
+First, identify key skills and expertise areas. Then, for each significant skill:
+1. Determine its market value based on current industry demand
+2. Categorize it appropriately
+3. Write a clear, concise description
 
-1. Overall Assessment:
-   - Evaluate key skills and experiences
-   - Identify core competencies
-   - Highlight unique selling points
+Format your response in two parts:
+1. General Assessment: Brief overview of the professional profile
+2. NFT Recommendations: List of specific skills that could be tokenized
 
-2. NFT Token Recommendations:
-   For each recommended skill token, provide:
-   - Token Name
-   - Category (Technical, Management, Industry Expertise)
-   - Description
-   - Suggested Market Value
+For each NFT recommendation, include:
+- Name: The specific skill or competency
+- Category: Technical, Management, or Industry Expertise
+- Description: 1-2 sentences explaining the skill
+- Suggested Price: Estimated market value in ETH
 
-Focus on high-value skills that would be attractive in a marketplace setting.
-Provide specific, actionable recommendations for tokenization.
+Focus on concrete, marketable skills rather than general qualities. Be specific and realistic in your valuations.
 
-Format the response to be easily parsed, with clear sections for the assessment and NFT recommendations.`;
+Format the NFT recommendations to be easily parsed, following this exact structure for each:
+---NFT START---
+Name: [Skill Name]
+Category: [Category]
+Description: [Description]
+Price: [X.XX ETH]
+---NFT END---`;
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -57,7 +63,7 @@ Format the response to be easily parsed, with clear sections for the assessment 
         messages: [
           {
             role: 'system',
-            content: 'You are an expert AI evaluator specializing in skill tokenization and professional assessment. Provide detailed analysis and specific NFT token recommendations.'
+            content: 'You are an expert AI evaluator specializing in skill tokenization and professional assessment.'
           },
           { role: 'user', content: prompt }
         ],
@@ -71,36 +77,42 @@ Format the response to be easily parsed, with clear sections for the assessment 
     }
 
     const data = await response.json();
-    console.log('Generated evaluation successfully');
-
-    // Parse the AI response to extract NFT recommendations
     const content = data.choices[0].message.content;
     
-    // Mock NFT recommendations (in production, you would parse these from the AI response)
-    const recommendedNFTs = [
-      {
-        name: "Full Stack Development",
-        category: "Technical",
-        description: "Comprehensive web development expertise across frontend and backend technologies",
-        suggestedPrice: "0.5 ETH"
-      },
-      {
-        name: "Project Management",
-        category: "Management",
-        description: "Experience in leading complex technical projects and teams",
-        suggestedPrice: "0.3 ETH"
-      },
-      {
-        name: "Blockchain Architecture",
-        category: "Technical",
-        description: "Expertise in designing and implementing blockchain solutions",
-        suggestedPrice: "0.8 ETH"
+    // Parse NFT recommendations from the AI response
+    const nftRecommendations: Array<{
+      name: string;
+      category: string;
+      description: string;
+      suggestedPrice: string;
+    }> = [];
+
+    const nftBlocks = content.split('---NFT START---')
+      .slice(1) // Skip the first element (before first NFT block)
+      .map(block => block.split('---NFT END---')[0].trim());
+
+    nftBlocks.forEach(block => {
+      const name = block.match(/Name: (.+)/)?.[1];
+      const category = block.match(/Category: (.+)/)?.[1];
+      const description = block.match(/Description: (.+)/)?.[1];
+      const price = block.match(/Price: (.+)/)?.[1];
+
+      if (name && category && description && price) {
+        nftRecommendations.push({
+          name: name.trim(),
+          category: category.trim(),
+          description: description.trim(),
+          suggestedPrice: price.trim()
+        });
       }
-    ];
+    });
+
+    // Get the general assessment (everything before the first NFT block)
+    const generalAssessment = content.split('---NFT START---')[0].trim();
 
     return new Response(JSON.stringify({ 
-      evaluation: content,
-      recommendedNFTs
+      evaluation: generalAssessment,
+      recommendedNFTs: nftRecommendations
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
