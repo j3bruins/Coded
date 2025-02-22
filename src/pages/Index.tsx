@@ -1,9 +1,9 @@
-
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Shield, Lightbulb, BarChart3, ShoppingBag } from "lucide-react";
+import { ArrowRight, ShoppingBag } from "lucide-react";
 import { MatrixBackground } from "@/components/MatrixBackground";
 import { useNavigate } from "react-router-dom";
+import Globe from "@/components/Globe";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -54,34 +54,17 @@ const Index = () => {
       <section id="features" className="py-20 bg-black/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12 text-[#00ff41] text-glow">Why Coded?</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Shield,
-                title: "Secure Transactions",
-                description: "Smart contracts ensure safe and transparent talent exchanges",
-              },
-              {
-                icon: Lightbulb,
-                title: "AI-Powered Insights",
-                description: "Get personalized recommendations for skill tokenization",
-              },
-              {
-                icon: BarChart3,
-                title: "Growth Opportunities",
-                description: "Access a global marketplace of talent and opportunities",
-              },
-            ].map((feature, index) => (
-              <div
-                key={index}
-                className="p-6 bg-black/40 backdrop-blur-sm rounded-lg border border-[#00ff41]/30 hover:border-[#00ff41] transition-all duration-300 matrix-border animate-float"
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                <feature.icon className="h-12 w-12 text-[#00ff41] mb-4" />
-                <h3 className="text-xl font-semibold mb-2 text-[#00ff41]">{feature.title}</h3>
-                <p className="text-[#00ff41]/70">{feature.description}</p>
-              </div>
-            ))}
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <p className="text-2xl text-[#00ff41]/90 leading-relaxed">
+                Take your talents beyond the trenches. Tokenize them and sell them via NFTs.
+                <span className="block mt-4 text-3xl font-bold">The world is yours.</span>
+              </p>
+            </div>
+            <div className="relative">
+              <Globe />
+              <div className="absolute inset-0 bg-gradient-radial from-transparent to-black/20 pointer-events-none" />
+            </div>
           </div>
         </div>
       </section>
