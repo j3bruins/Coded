@@ -6,7 +6,7 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Upload, FileText, Linkedin, Loader2 } from "lucide-react";
+import { Upload, FileText, Linkedin, Loader2, AlertCircle } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
 const SkillEvaluation = () => {
@@ -15,16 +15,37 @@ const SkillEvaluation = () => {
   const [additionalInfo, setAdditionalInfo] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [evaluation, setEvaluation] = useState("");
+  const [formError, setFormError] = useState("");
   const { toast } = useToast();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setResume(e.target.files[0]);
+      setFormError("");
     }
+  };
+
+  const validateForm = () => {
+    if (!linkedinProfile && !resume && !additionalInfo.trim()) {
+      setFormError("Please provide at least one of: LinkedIn profile URL, resume, or additional information");
+      return false;
+    }
+    setFormError("");
+    return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      toast({
+        title: "Validation Error",
+        description: "Please provide at least one source of information for evaluation.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -76,24 +97,33 @@ const SkillEvaluation = () => {
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
+              {formError && (
+                <div className="flex items-center gap-2 p-3 rounded bg-red-950/50 border border-red-500/50 text-red-400">
+                  <AlertCircle className="w-5 h-5" />
+                  <p>{formError}</p>
+                </div>
+              )}
+              
               <div className="space-y-2">
-                <Label htmlFor="linkedin" className="text-[#00ff41]">LinkedIn Profile URL</Label>
+                <Label htmlFor="linkedin" className="text-[#00ff41]">LinkedIn Profile URL (Optional)</Label>
                 <div className="flex items-center space-x-2">
                   <Linkedin className="w-5 h-5" />
                   <Input
                     id="linkedin"
                     type="url"
                     value={linkedinProfile}
-                    onChange={(e) => setLinkedinProfile(e.target.value)}
+                    onChange={(e) => {
+                      setLinkedinProfile(e.target.value);
+                      setFormError("");
+                    }}
                     className="bg-black/50 border-[#00ff41]/30 text-[#00ff41] placeholder:text-[#00ff41]/50"
                     placeholder="https://linkedin.com/in/your-profile"
-                    required
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="resume" className="text-[#00ff41]">Upload Resume</Label>
+                <Label htmlFor="resume" className="text-[#00ff41]">Upload Resume (Optional)</Label>
                 <div className="flex items-center space-x-2">
                   <Input
                     id="resume"
@@ -101,18 +131,20 @@ const SkillEvaluation = () => {
                     onChange={handleFileChange}
                     accept=".pdf,.doc,.docx"
                     className="bg-black/50 border-[#00ff41]/30 text-[#00ff41] file:bg-[#00ff41] file:text-black file:border-0"
-                    required
                   />
                   {resume && <FileText className="w-5 h-5 text-[#00ff41]" />}
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="additional" className="text-[#00ff41]">Additional Information</Label>
+                <Label htmlFor="additional" className="text-[#00ff41]">Additional Information (Optional)</Label>
                 <Textarea
                   id="additional"
                   value={additionalInfo}
-                  onChange={(e) => setAdditionalInfo(e.target.value)}
+                  onChange={(e) => {
+                    setAdditionalInfo(e.target.value);
+                    setFormError("");
+                  }}
                   className="bg-black/50 border-[#00ff41]/30 text-[#00ff41] placeholder:text-[#00ff41]/50"
                   placeholder="Add any additional skills or experiences you'd like the AI to consider..."
                   rows={4}
