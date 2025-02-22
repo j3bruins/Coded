@@ -15,10 +15,12 @@ const Index = () => {
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4">
         <div className="max-w-7xl mx-auto text-center">
-          <div className="inline-block mb-4 matrix-fade-in" style={{ animationDelay: "0.2s" }}>
-            <span className="px-3 py-1 rounded-full text-sm font-medium bg-[#00ff41]/10 text-[#00ff41] matrix-border">
-              Revolutionizing Talent Economy
-            </span>
+          <div className="inline-block mb-8 matrix-fade-in" style={{ animationDelay: "0.2s" }}>
+            <img
+              src="/lovable-uploads/88eb9bb7-e7e1-4590-8962-dad42cb603c0.png"
+              alt="Coded Waveform Logo"
+              className="h-24 w-auto mx-auto"
+            />
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6 text-[#00ff41] text-glow matrix-fade-in" style={{ animationDelay: "0.4s" }}>
             Tokenize Your Talents
