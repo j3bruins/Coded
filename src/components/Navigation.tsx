@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Menu, X, ShoppingBag } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export const Navigation = () => {
@@ -31,14 +31,6 @@ export const Navigation = () => {
               className="border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 matrix-border"
             >
               Connect Wallet
-            </Button>
-            <Button
-              variant="outline"
-              className="border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 matrix-border flex items-center gap-2 animate-pulse"
-              onClick={() => navigate('/marketplace')}
-            >
-              <ShoppingBag className="w-4 h-4" />
-              Marketplace
             </Button>
           </div>
 
@@ -81,17 +73,6 @@ export const Navigation = () => {
               className="w-full mt-2 border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 matrix-border"
             >
               Connect Wallet
-            </Button>
-            <Button
-              variant="outline"
-              className="w-full mt-2 border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41]/10 matrix-border flex items-center justify-center gap-2"
-              onClick={() => {
-                navigate('/marketplace');
-                setIsOpen(false);
-              }}
-            >
-              <ShoppingBag className="w-4 h-4" />
-              Marketplace
             </Button>
           </div>
         </div>
