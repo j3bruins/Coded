@@ -10,11 +10,13 @@ const Splash = () => {
     <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
       <MatrixBackground />
       
-      {/* Text Section */}
+      {/* Chain Image Section */}
       <div className="text-center mb-12 relative">
-        <div className="text-[#00ff41]/60 text-xl tracking-widest animate-fade-in">
-          UNLOCK YOUR POTENTIAL
-        </div>
+        <img 
+          src="/lovable-uploads/3ce72ebc-2a94-4c11-887c-6f1453e766b5.png" 
+          alt="Chain Link" 
+          className="w-64 h-auto opacity-80 mix-blend-screen mb-8"
+        />
       </div>
 
       {/* Call to Action Button */}
