@@ -1,6 +1,23 @@
 # Coded
 
+@coded/plugin-jupiter
+This package is part of the Cubie plugin repository for the (Maiar)[https://maiar.dev] ecosystem, designed to work seamlessly with @maiar-ai/core.
+
+Documentation
+For detailed documentation, examples, and API reference, visit: https://maiar.dev/docs
+
 Beyond the trenches, Coded helps Degens tokenize their talents and sell them around the world. Coded helps users create NFTs based on their skills. It connects to the Maiar AI framework to power its functionality.
+
+# Configuration 
+
+The Jupiter plugin requires the following configuration
+
+
+interface PluginJupiterConfig {
+  apiKey?: string; // Your jupiter x-api-key
+  store?: (tokens: JupiterTokenResponse[]) => Promise<void>; // An optional method for storing the remote token list to a internal database/store
+  load?: (params: LoadJupiterTokenParams) => Promise<JupiterTokenResponse[]>; // An optional method to load and search the synced token list by token name and symbol
+}
 
 ## Link to Maiar and Plugins
 
