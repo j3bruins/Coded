@@ -13,12 +13,13 @@ Beyond the trenches, Coded helps Degens tokenize their talents and sell them aro
 
 The Jupiter plugin requires the following configuration
 
-  interface PluginJupiterConfig {
+ ```typescript
+interface PluginJupiterConfig {
   apiKey?: string; // Your jupiter x-api-key
   store?: (tokens: JupiterTokenResponse[]) => Promise<void>; // An optional method for storing the remote token list to a internal database/store
   load?: (params: LoadJupiterTokenParams) => Promise<JupiterTokenResponse[]>; // An optional method to load and search the synced token list by token name and symbol
-          }
-
+}
+```
 
 # Optional Configuration
 
@@ -35,6 +36,95 @@ get_quote: Fetch a quote between 2 input mints when provided with an amount. The
 get_price: Get the price of a list of input mints with an optional vsToken that can be supplied to use as the base of the price (default: usd).
 get_token_info: Get standard token info when supplied with a contract / mint address.
 For more detailed examples and advanced usage, visit our documentation (https://maiar.dev/docs).
+
+
+### Creation
+
+First you create a storage/loader functions for the token information. In this example we are mocking up a memory store.
+
+```typescript
+const memoryStore: JupiterTokenResponse[] = [];
+
+// mock a storage function to store data
+async function storeData(data: JupiterTokenResponse[]) {
+  memoryStory.push(...data);
+}
+
+// mock a loader function from an external storage source
+async function loadData(params: LoadJupiterTokenParams) {
+  return (
+    params &&
+    memoryStory.filter(
+      (token) =>
+        (params.name &&
+          token.name.toLocaleLowerCase() === params.name.toLocaleLowerCase()) ||
+        (params.ticker &&
+          token.symbol.toLocaleLowerCase() ===
+            params.ticker.toLocaleLowerCase())
+    )
+  );
+}
+```
+
+Then you want to initialize your agent runtime, and pass the `storeData()` and `loadData()` methods into the `new PluginJupiter()` call.
+
+```typescript
+import { createRuntime } from "@maiar-ai/core";
+
+// Import providers
+import { OpenAIProvider } from "@maiar-ai/model-openai";
+import { SQLiteProvider } from "@maiar-ai/memory-sqlite";
+
+// Import all plugins
+import { PluginTextGeneration } from "@maiar-ai/plugin-text";
+import { PluginTime } from "@maiar-ai/plugin-time";
+import { PluginCharacter } from "@maiar-ai/plugin-character";
+// Create and start the agent
+const runtime = createRuntime({
+  model: new OpenAIProvider({
+    model: "gpt-4o",
+    apiKey: process.env.OPENAI_API_KEY as string,
+  }),
+  memory: new SQLiteProvider({
+    dbPath: path.join(process.cwd(), "data", "conversations.db"),
+  }),
+  plugins: [
+    new PluginTextGeneration(),
+    new PluginTime(),
+    new PluginCharacter({
+      character: fs.readFileSync(
+        path.join(process.cwd(), "character.xml"),
+        "utf-8"
+      ),
+    }),
+    new PluginJupiter({
+      store: storeData,
+      load: loadData,
+    }),
+  ],
+});
+```
+
+Now you can start your agents and test it out.
+
+```typescript
+// Start the runtime if this file is run directly
+if (require.main === module) {
+  console.log("Starting agent...");
+  runtime.start().catch((error) => {
+    console.error("Failed to start agent:", error);
+    process.exit(1);
+  });
+
+  // Handle shutdown gracefully
+  process.on("SIGINT", async () => {
+    console.log("Shutting down agent...");
+    await runtime.stop();
+    process.exit(0);
+  });
+}
+```
+
 
 
 ## Link to Maiar and Plugins
