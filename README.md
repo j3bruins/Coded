@@ -17,7 +17,7 @@ The Jupiter plugin requires the following configuration
   apiKey?: string; // Your jupiter x-api-key
   store?: (tokens: JupiterTokenResponse[]) => Promise<void>; // An optional method for storing the remote token list to a internal database/store
   load?: (params: LoadJupiterTokenParams) => Promise<JupiterTokenResponse[]>; // An optional method to load and search the synced token list by token name and symbol
-}
+          }
 
 
 # Optional Configuration
