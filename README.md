@@ -13,11 +13,29 @@ Beyond the trenches, Coded helps Degens tokenize their talents and sell them aro
 The Jupiter plugin requires the following configuration
 
 
-interface PluginJupiterConfig {
+  interface PluginJupiterConfig {
   apiKey?: string; // Your jupiter x-api-key
   store?: (tokens: JupiterTokenResponse[]) => Promise<void>; // An optional method for storing the remote token list to a internal database/store
   load?: (params: LoadJupiterTokenParams) => Promise<JupiterTokenResponse[]>; // An optional method to load and search the synced token list by token name and symbol
 }
+
+
+Optional Configuration
+
+apiKey: This is your Jupiter x-api-key. Optional (default: '')
+store: A function that accepts a list of JupiterTokenResponse objects and stores them in a database or filesystem
+loader: A function that accepts an object {name?: string, symbol?: string} that can be used to search the tokens stored by store()
+
+Plugin Information
+
+Actions
+
+get_contract_address: Get the contract address of a token when provided the token name or symbol. This method requires that JupiterService was provided with store and loader methods
+get_quote: Fetch a quote between 2 input mints when provided with an amount. The swapDirection in this method may be inferred due to the nature of the users request.
+get_price: Get the price of a list of input mints with an optional vsToken that can be supplied to use as the base of the price (default: usd).
+get_token_info: Get standard token info when supplied with a contract / mint address.
+For more detailed examples and advanced usage, visit our documentation (https://maiar.dev/docs).
+
 
 ## Link to Maiar and Plugins
 
