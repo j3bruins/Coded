@@ -1,5 +1,6 @@
 # Coded
 
+
 @coded/plugin-jupiter
 This package is part of the Cubie plugin repository for the (Maiar)[https://maiar.dev] ecosystem, designed to work seamlessly with @maiar-ai/core.
 
