@@ -12,7 +12,6 @@ Beyond the trenches, Coded helps Degens tokenize their talents and sell them aro
 
 The Jupiter plugin requires the following configuration
 
-
   interface PluginJupiterConfig {
   apiKey?: string; // Your jupiter x-api-key
   store?: (tokens: JupiterTokenResponse[]) => Promise<void>; // An optional method for storing the remote token list to a internal database/store
