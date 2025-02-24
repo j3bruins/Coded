@@ -34,10 +34,10 @@
   "homepage": "https://coded-blue.vercel.app/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/j3bruins/Coded.git"
+    "url": "git+https://github.com/j3bruins/Coded/plugin-jupiter.git"
   },
   "bugs": {
-    "url": "https://github.com/j3bruins/Coded/issues"
+    "url": "https://github.com/j3bruins/Coded/plugin-jupiter/issues"
   },
   "scripts": {
     "build": "pnpm run clean && tsc --project tsconfig.json",
