@@ -1,6 +1,6 @@
 # Coded
 
-This project, built with Lovable, helps users create NFTs based on their skills. It connects to the Maiar AI framework to power its functionality.
+Beyond the trenches, Coded helps Degens tokenize their talents and sell them around the world. Coded helps users create NFTs based on their skills. It connects to the Maiar AI framework to power its functionality.
 
 ## Link to Maiar and Plugins
 
@@ -17,11 +17,3 @@ This project is built with .
 - React
 - shadcn-ui
 - Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/91ac825b-1b13-4837-ab9e-be96b6175948) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
