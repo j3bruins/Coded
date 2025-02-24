@@ -20,15 +20,15 @@ The Jupiter plugin requires the following configuration
 }
 
 
-Optional Configuration
+# Optional Configuration
 
 apiKey: This is your Jupiter x-api-key. Optional (default: '')
 store: A function that accepts a list of JupiterTokenResponse objects and stores them in a database or filesystem
 loader: A function that accepts an object {name?: string, symbol?: string} that can be used to search the tokens stored by store()
 
-Plugin Information
+# Plugin Information
 
-Actions
+# Actions
 
 get_contract_address: Get the contract address of a token when provided the token name or symbol. This method requires that JupiterService was provided with store and loader methods
 get_quote: Fetch a quote between 2 input mints when provided with an amount. The swapDirection in this method may be inferred due to the nature of the users request.
