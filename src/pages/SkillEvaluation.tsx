@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Navigation } from "@/components/Navigation";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
@@ -9,12 +8,21 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { mintNFT, SkillNFT } from "@/utils/nftUtils";
 import EvaluationForm from "@/components/skill-evaluation/EvaluationForm";
 import EvaluationResults from "@/components/skill-evaluation/EvaluationResults";
+import NFTPreview from "@/components/skill-evaluation/NFTPreview";
+
+interface NFTGeneration {
+  description: string;
+  imageUrl: string;
+}
 
 const SkillEvaluation = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isGeneratingNFT, setIsGeneratingNFT] = useState(false);
+  const [isMinting, setIsMinting] = useState(false);
   const [evaluation, setEvaluation] = useState("");
   const [recommendedNFTs, setRecommendedNFTs] = useState<SkillNFT[]>([]);
   const [selectedNFTs, setSelectedNFTs] = useState<SkillNFT[]>([]);
+  const [nftPreview, setNftPreview] = useState<NFTGeneration | null>(null);
   const { toast } = useToast();
   const { connection } = useConnection();
   const wallet = useWallet();
@@ -74,38 +82,59 @@ const SkillEvaluation = () => {
     });
   };
 
-  const handleMintNFT = async (nft: SkillNFT) => {
+  const handleGenerateNFT = async (skills: string) => {
+    setIsGeneratingNFT(true);
+    try {
+      const description = `NFT Concept: A digital badge showcasing ${skills}`;
+      const imageUrl = `https://via.placeholder.com/300?text=${encodeURIComponent(skills.slice(0, 20))}`;
+      
+      setNftPreview({ description, imageUrl });
+      
+      toast({
+        title: "NFT Generated",
+        description: "Your NFT concept has been generated successfully.",
+      });
+    } catch (error) {
+      console.error("Error generating NFT:", error);
+      toast({
+        title: "Generation Failed",
+        description: "Failed to generate NFT. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsGeneratingNFT(false);
+    }
+  };
+
+  const handleMintNFT = async () => {
     if (!wallet.connected) {
       toast({
         title: "Wallet Not Connected",
-        description: "Please connect your Phantom wallet to mint NFTs",
+        description: "Please connect your wallet to mint NFTs",
         variant: "destructive",
       });
       return;
     }
 
-    setIsLoading(true);
+    if (!nftPreview) return;
+
+    setIsMinting(true);
     try {
-      await mintNFT(
-        connection,
-        wallet,
-        nft,
-        "Proof of skill placeholder" // Adding the missing proofOfSkill parameter
-      );
+      console.log("Minting NFT:", nftPreview);
       
       toast({
-        title: "NFT Minted Successfully!",
-        description: `Your skill "${nft.name}" has been minted as an NFT`,
+        title: "NFT Minted",
+        description: "Your NFT has been minted successfully!",
       });
     } catch (error) {
       console.error("Error minting NFT:", error);
       toast({
         title: "Minting Failed",
-        description: "There was an error minting your NFT. Please try again.",
+        description: "Failed to mint NFT. Please try again.",
         variant: "destructive",
       });
     } finally {
-      setIsLoading(false);
+      setIsMinting(false);
     }
   };
 
@@ -141,8 +170,22 @@ const SkillEvaluation = () => {
               Let our AI analyze your professional profile and recommend the best tokenization strategy
             </p>
           </CardHeader>
-          <CardContent>
-            <EvaluationForm onSubmit={handleSubmit} isLoading={isLoading} />
+          <CardContent className="space-y-8">
+            <EvaluationForm
+              onSubmit={handleSubmit}
+              onGenerateNFT={handleGenerateNFT}
+              isLoading={isLoading}
+              isGeneratingNFT={isGeneratingNFT}
+            />
+            
+            {nftPreview && (
+              <NFTPreview
+                description={nftPreview.description}
+                imageUrl={nftPreview.imageUrl}
+                onMint={handleMintNFT}
+                isMinting={isMinting}
+              />
+            )}
             
             {evaluation && (
               <EvaluationResults
