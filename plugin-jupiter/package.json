@@ -1,0 +1,58 @@
+{
+  "name": "@Coded/plugin-jupiter",
+  "version": "0.1.1",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "description": "Plugin Jupiter: A MAIAR plugin that wraps the jupiter api",
+  "keywords": [
+    "ai",
+    "agent",
+    "framework",
+    "plugin",
+    "jupiter",
+    "jupiter api",
+    "solana"
+  ],
+  "author": "0xSoc (https://coded-blue.vercel.app/)",
+  "license": "MIT",
+  "homepage": "https://coded-blue.vercel.app/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/j3bruins/Coded.git"
+  },
+  "bugs": {
+    "url": "https://github.com/j3bruins/Coded/issues"
+  },
+  "scripts": {
+    "build": "pnpm run clean && tsc --project tsconfig.json",
+    "prestart": "pnpm run build",
+    "start": "node --import tsx dist/demo/app.js",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+    "@maiar-ai/core": "^0.8.0",
+    "axios": "^1.7.9",
+    "zod": "3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.5",
+    "typescript": "^5.7.3"
+  }
+}
