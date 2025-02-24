@@ -1,56 +1,14 @@
-# Welcome to your Lovable project
+# Coded
 
-## Project info
+This project, built with Lovable, helps users create NFTs based on their skills. It connects to the Maiar AI framework to power its functionality.
 
-**URL**: https://lovable.dev/projects/91ac825b-1b13-4837-ab9e-be96b6175948
+## Link to Maiar and Plugins
 
-## How can I edit this code?
+- **Maiar Framework**: We use Maiar, a composable, plugin-based AI agent framework from Uranium Corporation (see [Maiar GitHub](https://github.com/UraniumCorporation/maiar-ai)). Maiar handles the AI logic for generating NFT concepts from user-input skills.
+- **Plugins**: The project taps into Maiar’s plugin ecosystem (see [Maiar Plugin Registry](https://github.com/UraniumCorporation/plugin-registry)). Plugins like text processing or image generation could be used to turn skills into NFT descriptions and visuals.
+- **How It Works**: Users enter skills on the "Create NFT" page, which calls an API (planned to integrate with Maiar’s runtime). Maiar processes the input via plugins and returns NFT data.
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/91ac825b-1b13-4837-ab9e-be96b6175948) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
+This integration is in progress—future updates will fully connect the frontend to a Maiar backend.
 
 This project is built with .
 
